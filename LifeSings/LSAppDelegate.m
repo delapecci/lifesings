@@ -7,6 +7,17 @@
 //
 
 #import "LSAppDelegate.h"
+#import "UIColor+FlatUI.h"
+#import "UINavigationBar+FlatUI.h"
+#import "UIFont+FlatUI.h"
+#import "UIImage+FlatUI.h"
+
+#import "KxIntroViewController.h"
+#import "KxIntroViewPage.h"
+#import "KxIntroView.h"
+
+#import "LSLeftSideMenuViewController.h"
+#import "MMDrawerController.h"
 
 @implementation LSAppDelegate
 
@@ -16,11 +27,79 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // 加载用户配置
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger typeNum = [userDefaults integerForKey:@"rynthm_type"];
+    if (!typeNum) {
+        typeNum = 1;
+        [userDefaults setInteger:typeNum forKey:@"rynthm_type"];
+    }
+
+    BOOL shouldShowIntro = [userDefaults boolForKey:@"should_show_intro"];
+    if (shouldShowIntro == 0) {
+        shouldShowIntro = YES;
+        [userDefaults setBool:shouldShowIntro forKey:@"should_show_intro"];
+    }
+
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *mainNavViewController = [mainStoryBoard instantiateInitialViewController];
+    
+    UIViewController * leftSideDrawerViewController = [[LSLeftSideMenuViewController alloc] init];
+    MMDrawerController * drawerController = [[MMDrawerController alloc]
+                                             initWithCenterViewController:mainNavViewController
+                                             leftDrawerViewController:leftSideDrawerViewController
+                                             rightDrawerViewController:nil];
+
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    [drawerController setMaximumLeftDrawerWidth:screenBounds.size.width / 2];
+    // 不打开手势触发菜单
+    //[drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    //[drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
+
+    if (shouldShowIntro) [self showIntro];
+
+    // 自定义主题色调
+    UINavigationBar *themeNavBar = [UINavigationBar appearance];
+    [themeNavBar configureFlatNavigationBarWithColor:[UIColor midnightBlueColor]];
+    [themeNavBar setShadowImage:[UIImage imageWithColor:[UIColor greenSeaColor] cornerRadius:1.0f]];
+    //NSValue *offsetValue = [NSValue valueWithUIOffset: UIOffsetMake(-0.3f, 0.2f)];
+    themeNavBar.titleTextAttributes = @{UITextAttributeFont: [UIFont flatFontOfSize:21.0f],
+            UITextAttributeTextColor: [UIColor whiteColor]};
+
+    //[(UITableView *)[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
+    //[(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [application setStatusBarHidden:NO];
+
     return YES;
+}
+
+- (void) showIntro
+{
+    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @""
+                                                          withDetail: @"每一天苦乐相伴，在忘却之前\n简单的指尖滑动，时光留下回声"
+                                                           withImage: nil];
+    
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @""
+                                                          withDetail: @"乐音起伏，追忆似水流年\n不同的节奏，相同的感动"
+                                                           withImage:nil];
+
+    [page0.detailLabel setFont:[UIFont flatFontOfSize:19.0f]];
+    [page1.detailLabel setFont:[UIFont flatFontOfSize:19.0f]];
+    page0.detailLabel.textAlignment = NSTextAlignmentCenter;
+    page1.detailLabel.textAlignment = NSTextAlignmentCenter;
+    
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
+    
+    vc.introView.backgroundColor = [UIColor midnightBlueColor];
+    vc.introView.animatePageChanges = YES;
+    vc.introView.gradientBackground = YES;
+    
+    //[vc presentInView:self.window.rootViewController.view];
+    [vc presentInViewController:self.window.rootViewController fullScreenLayout:NO];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

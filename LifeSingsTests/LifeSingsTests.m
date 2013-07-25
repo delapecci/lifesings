@@ -7,6 +7,7 @@
 //
 
 #import "LifeSingsTests.h"
+#import "LSDateHelper.h"
 
 @implementation LifeSingsTests
 
@@ -26,7 +27,11 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in LifeSingsTests");
+    NSDate *currentDate = [NSDate date];
+    NSDate *oneYearAgoDate = [NSDate dateWithTimeIntervalSinceReferenceDate:409968000l];
+    NSInteger diffDays = [LSDateHelper daysDiffBetweenDate:currentDate andDate:oneYearAgoDate];
+    NSLog(@"diffDays=%d", diffDays);
+    //STFail(@"Unit tests are not implemented yet in LifeSingsTests");
 }
 
 @end
