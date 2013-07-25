@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		023D27FB13DE4407959EE981 /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = BA26694436A64ADCAAC34785 /* UIProgressView+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		03498091FC1347C78B034CA3 /* UIViewController+MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BCC2818CB64C3CB93D0291 /* UIViewController+MMDrawerController.h */; };
+		0832A63F7E974CDA9E5568F7 /* UIBarButtonItem+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 45B193DE1BB54CA2BBFC1DDE /* UIBarButtonItem+FlatUI.h */; };
+		10EDC463679C4537B3EB6B2F /* UIStepper+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEAC6148214451885676E1D /* UIStepper+FlatUI.h */; };
+		1450AD596C9A4E03BD6842A9 /* MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 696EE23DE7BC49C4AF797CFF /* MMDrawerController.h */; };
+		14672617226D4C988672AB98 /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E80D1C170649A98EE25E55 /* FUIButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		1A2A571AF9254E618E092120 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 948419EE40B64251AB15769A /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		1B405A8E23D94EE3A663A3BF /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B31F89B1A664B20AC7A902A /* UIViewController+MMDrawerController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		1B9A37B48AA74734AF234AC8 /* UISlider+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD0989998C9426A80697B03 /* UISlider+FlatUI.h */; };
+		2E93E269694C4C4497CE55A5 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF080381BC448BBA0373533 /* MMDrawerController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		332F5880CE1E4FC4AFD3C1CA /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8603E5B4CC11421D8C7EA0E1 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		3C0F67FC98554701B3911B45 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30351595053842F0952D762A /* FUICellBackgroundView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		460F6AE66BB04B3393DA8503 /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F2C5564F8D4B58B0E099FE /* UISlider+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		564CBB0B6AF94217BFA5FD26 /* FUISwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D98E75B34084C6B81DF6684 /* FUISwitch.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		59D6C97DD95546699702AC55 /* FUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 310FBCB7AF5942988CE9E189 /* FUISegmentedControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		5E90C5D181F24149B689F4F4 /* UIColor+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A097399F1E845D28C485760 /* UIColor+FlatUI.h */; };
+		5EBBCE373C0E4DE1A0C93A6D /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F5E41932D14FF1957FD007 /* MMDrawerVisualState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		61429C5225D140A683C680F0 /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AF9C9AE1704D88A0C6F602 /* UIBarButtonItem+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		7F01DB30C8F74F5297CAC955 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FB37CBEC664C65AE832F05 /* MMDrawerBarButtonItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		8930940BB34C46F4AA6CA451 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E11F98449746A68A44B24B /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		907570F159284D319E655A00 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A7D770D501B14D0AAC08A5D7 /* DDTTYLogger.h */; };
+		971DFC6C57214D10A4736665 /* FUIButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 82A20E76E7A94BE8BBA32BA1 /* FUIButton.h */; };
+		974471651D9D4097BACC81CD /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 1831B3797A214D5786D10759 /* DDLog.h */; };
+		9BDC97C29BDE48D5AD2CE3AB /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A142D51E7EC4326BFFCC982 /* DDLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		9F26C8D5A8124053AD8F7798 /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D282C6801B04F4F9106A9A8 /* DDFileLogger.h */; };
+		A0A2E7FF25D74763BE195736 /* FlatUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 371CE395A45147768A1D91AA /* FlatUIKit.h */; };
+		A4DAD1F3A126412D9D53EBF5 /* UITabBar+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 302CF08844594E798F537AC4 /* UITabBar+FlatUI.h */; };
+		A6732E1CF4CD471DB45A0C15 /* FUISegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = E51E47F653EF43C3B5235A17 /* FUISegmentedControl.h */; };
+		A98C1EEA90DC49FD8F0AD580 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E4239C6C5754360B26E0AF4 /* DDAbstractDatabaseLogger.h */; };
+		AA7DCB94772A4F17A4AA4FBE /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC5D5CA1F8B4D1AA6EFF9EC /* UITableViewCell+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		AB94B192570B44398200A2D5 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65FB55AD9003469DAC54EFB0 /* DDASLLogger.h */; };
+		ACEB0A4AEFA14869BFA3BF89 /* UIProgressView+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 637FBE5DC0704668BAAB93A7 /* UIProgressView+FlatUI.h */; };
+		B0E8D11B5AA0444FBE33BF8D /* UITableViewCell+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6734E38B0CA942FCAC938F97 /* UITableViewCell+FlatUI.h */; };
+		B1DDFB2FA4994A3FB90EA623 /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 237CADA04D5A44069789EFC8 /* UIStepper+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		B5F05E3F781C411788084F82 /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 359CB882D90045BC890CEFA0 /* FUIAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		B76A50A4A8C2424A9168966E /* MMDrawerBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 192AFFED431341A9A41D05A3 /* MMDrawerBarButtonItem.h */; };
+		BA40CFA91DED4C638816DAD6 /* UINavigationBar+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F7E405B104059B750E1FB /* UINavigationBar+FlatUI.h */; };
+		BD5B56C8BA1248979B080ABE /* UIFont+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 82568A5B8078439991BD2323 /* UIFont+FlatUI.h */; };
+		CBFDA9F2036E481F9834C5CC /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A423A7860E414DBB133310 /* UINavigationBar+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		CD0ED64C3592440C9B4EABFD /* FUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 69B53F43F9214AA68A9B777C /* FUIAlertView.h */; };
+		D3AA5DAB25F34220BF55E9C8 /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EE787D7D621D446FB5AD00A0 /* UIFont+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		D6F3F12A43D540FDB55D7958 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1C94EFCB7F4273AF2FEA6B /* Foundation.framework */; };
+		D80AB9AA7FAF4A8DB1F0A55C /* UIImage+FlatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = CAFAEF7618AB423DB9AF67D7 /* UIImage+FlatUI.h */; };
+		D80D139BD8F84DC0BA607A22 /* MMDrawerVisualState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9F89D5B8504D2C8B89450A /* MMDrawerVisualState.h */; };
+		D9833031833B44FFACA13E80 /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A415A271747A4076A797D550 /* UIImage+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		DA76B1C33EB74B33BE2B5AFA /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D654BF8A5B43409EAB4DDA /* UIColor+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		DEFCA5DA4974408E925065A2 /* FUISwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 30A866E4EC9041B790D6256C /* FUISwitch.h */; };
+		DF400AC4847C417D826AC8B7 /* FUICellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = F62D21B325D24F288D5099E0 /* FUICellBackgroundView.h */; };
+		EDC56B8E3C8F455EAE67D75D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DF55393773774A69B3C96070 /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		FE4C811497774060A6B7BF13 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9F16E82F074BE4A5C67933 /* UITabBar+FlatUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		FE8915F5D68144E3A56EB29B /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6AF17759E742EFBD07DF79 /* Pods-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		14D5558A109A4494B08DCFF0 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = SOURCE_ROOT; };
+		1831B3797A214D5786D10759 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = CocoaLumberjack/Lumberjack/DDLog.h; sourceTree = SOURCE_ROOT; };
+		192AFFED431341A9A41D05A3 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerBarButtonItem.h; path = MMDrawerController/MMDrawerController/MMDrawerBarButtonItem.h; sourceTree = SOURCE_ROOT; };
+		1A142D51E7EC4326BFFCC982 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = CocoaLumberjack/Lumberjack/DDLog.m; sourceTree = SOURCE_ROOT; };
+		1C482A69E72F4F0B99B0C329 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		1E5785C0F3B64FF1976BAB17 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BlackItalic.ttf"; path = "../FlatUI/Resources/Lato-BlackItalic.ttf"; sourceTree = SOURCE_ROOT; };
+		237CADA04D5A44069789EFC8 /* UIStepper+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIStepper+FlatUI.m"; path = "../FlatUI/Classes/ios/UIStepper+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		276CCDF84A60453EB1312B51 /* Lato-Black.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../FlatUI/Resources/Lato-Black.ttf"; sourceTree = SOURCE_ROOT; };
+		2A85FAD1AF504118ADF739AB /* Lato-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../FlatUI/Resources/Lato-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		302CF08844594E798F537AC4 /* UITabBar+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBar+FlatUI.h"; path = "../FlatUI/Classes/ios/UITabBar+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		30351595053842F0952D762A /* FUICellBackgroundView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FUICellBackgroundView.m; path = ../FlatUI/Classes/ios/FUICellBackgroundView.m; sourceTree = SOURCE_ROOT; };
+		30A866E4EC9041B790D6256C /* FUISwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FUISwitch.h; path = ../FlatUI/Classes/ios/FUISwitch.h; sourceTree = SOURCE_ROOT; };
+		310FBCB7AF5942988CE9E189 /* FUISegmentedControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FUISegmentedControl.m; path = ../FlatUI/Classes/ios/FUISegmentedControl.m; sourceTree = SOURCE_ROOT; };
+		31F5E41932D14FF1957FD007 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerVisualState.m; path = MMDrawerController/MMDrawerController/MMDrawerVisualState.m; sourceTree = SOURCE_ROOT; };
+		33D22F237337480591CB8375 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		359CB882D90045BC890CEFA0 /* FUIAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FUIAlertView.m; path = ../FlatUI/Classes/ios/FUIAlertView.m; sourceTree = SOURCE_ROOT; };
+		371CE395A45147768A1D91AA /* FlatUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FlatUIKit.h; path = ../FlatUI/Classes/ios/FlatUIKit.h; sourceTree = SOURCE_ROOT; };
+		3A097399F1E845D28C485760 /* UIColor+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+FlatUI.h"; path = "../FlatUI/Classes/ios/UIColor+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		3D3E9DEA936E44549BC1B51D /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "../FlatUI/Resources/Lato-BoldItalic.ttf"; sourceTree = SOURCE_ROOT; };
+		45B193DE1BB54CA2BBFC1DDE /* UIBarButtonItem+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+FlatUI.h"; path = "../FlatUI/Classes/ios/UIBarButtonItem+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		4AF080381BC448BBA0373533 /* MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerController.m; path = MMDrawerController/MMDrawerController/MMDrawerController.m; sourceTree = SOURCE_ROOT; };
+		50E80D1C170649A98EE25E55 /* FUIButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FUIButton.m; path = ../FlatUI/Classes/ios/FUIButton.m; sourceTree = SOURCE_ROOT; };
+		50F2C5564F8D4B58B0E099FE /* UISlider+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UISlider+FlatUI.m"; path = "../FlatUI/Classes/ios/UISlider+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		5943A726EE9D4247867169EB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C2F7E405B104059B750E1FB /* UINavigationBar+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+FlatUI.h"; path = "../FlatUI/Classes/ios/UINavigationBar+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		5D9F89D5B8504D2C8B89450A /* MMDrawerVisualState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerVisualState.h; path = MMDrawerController/MMDrawerController/MMDrawerVisualState.h; sourceTree = SOURCE_ROOT; };
+		637FBE5DC0704668BAAB93A7 /* UIProgressView+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+FlatUI.h"; path = "../FlatUI/Classes/ios/UIProgressView+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		65FB55AD9003469DAC54EFB0 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = CocoaLumberjack/Lumberjack/DDASLLogger.h; sourceTree = SOURCE_ROOT; };
+		660DBF871657426AA4497220 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		66BCC2818CB64C3CB93D0291 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MMDrawerController.h"; path = "MMDrawerController/MMDrawerController/UIViewController+MMDrawerController.h"; sourceTree = SOURCE_ROOT; };
+		6734E38B0CA942FCAC938F97 /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+FlatUI.h"; path = "../FlatUI/Classes/ios/UITableViewCell+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		696EE23DE7BC49C4AF797CFF /* MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerController.h; path = MMDrawerController/MMDrawerController/MMDrawerController.h; sourceTree = SOURCE_ROOT; };
+		69B53F43F9214AA68A9B777C /* FUIAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FUIAlertView.h; path = ../FlatUI/Classes/ios/FUIAlertView.h; sourceTree = SOURCE_ROOT; };
+		6D282C6801B04F4F9106A9A8 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = CocoaLumberjack/Lumberjack/DDFileLogger.h; sourceTree = SOURCE_ROOT; };
+		6E1C94EFCB7F4273AF2FEA6B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7AD0989998C9426A80697B03 /* UISlider+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UISlider+FlatUI.h"; path = "../FlatUI/Classes/ios/UISlider+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		7D98E75B34084C6B81DF6684 /* FUISwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FUISwitch.m; path = ../FlatUI/Classes/ios/FUISwitch.m; sourceTree = SOURCE_ROOT; };
+		7EF11F18160E40EDA5A792C6 /* CoreText.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		82568A5B8078439991BD2323 /* UIFont+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIFont+FlatUI.h"; path = "../FlatUI/Classes/ios/UIFont+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		82A20E76E7A94BE8BBA32BA1 /* FUIButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FUIButton.h; path = ../FlatUI/Classes/ios/FUIButton.h; sourceTree = SOURCE_ROOT; };
+		8603E5B4CC11421D8C7EA0E1 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = CocoaLumberjack/Lumberjack/DDTTYLogger.m; sourceTree = SOURCE_ROOT; };
+		86E11F98449746A68A44B24B /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = CocoaLumberjack/Lumberjack/DDFileLogger.m; sourceTree = SOURCE_ROOT; };
+		8B31F89B1A664B20AC7A902A /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MMDrawerController.m"; path = "MMDrawerController/MMDrawerController/UIViewController+MMDrawerController.m"; sourceTree = SOURCE_ROOT; };
+		8B9F16E82F074BE4A5C67933 /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITabBar+FlatUI.m"; path = "../FlatUI/Classes/ios/UITabBar+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		907B89E8CAF14849835CFB31 /* Lato-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../FlatUI/Resources/Lato-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		948419EE40B64251AB15769A /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = CocoaLumberjack/Lumberjack/DDASLLogger.m; sourceTree = SOURCE_ROOT; };
+		9A55205076A54509B4A9AF0E /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = SOURCE_ROOT; };
+		9DEAC6148214451885676E1D /* UIStepper+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIStepper+FlatUI.h"; path = "../FlatUI/Classes/ios/UIStepper+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		9E4239C6C5754360B26E0AF4 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.h; sourceTree = SOURCE_ROOT; };
+		A415A271747A4076A797D550 /* UIImage+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+FlatUI.m"; path = "../FlatUI/Classes/ios/UIImage+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		A7D770D501B14D0AAC08A5D7 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = CocoaLumberjack/Lumberjack/DDTTYLogger.h; sourceTree = SOURCE_ROOT; };
+		B8597A5207BE4A84801AC8CA /* QuartzCore.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		BA26694436A64ADCAAC34785 /* UIProgressView+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+FlatUI.m"; path = "../FlatUI/Classes/ios/UIProgressView+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		C4D99E9A56BA49D98FE41E97 /* Lato-Light.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../FlatUI/Resources/Lato-Light.ttf"; sourceTree = SOURCE_ROOT; };
+		CA02A4E8CA2D479E818EB91D /* Lato-Hairline.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "../FlatUI/Resources/Lato-Hairline.ttf"; sourceTree = SOURCE_ROOT; };
+		CAFAEF7618AB423DB9AF67D7 /* UIImage+FlatUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+FlatUI.h"; path = "../FlatUI/Classes/ios/UIImage+FlatUI.h"; sourceTree = SOURCE_ROOT; };
+		D7DF38B555BA46948F461677 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "../FlatUI/Resources/Lato-LightItalic.ttf"; sourceTree = SOURCE_ROOT; };
+		D8A423A7860E414DBB133310 /* UINavigationBar+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+FlatUI.m"; path = "../FlatUI/Classes/ios/UINavigationBar+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		DCAE259F92544EDDAAC8476F /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = SOURCE_ROOT; };
+		DF55393773774A69B3C96070 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.m; sourceTree = SOURCE_ROOT; };
+		E4FB37CBEC664C65AE832F05 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerBarButtonItem.m; path = MMDrawerController/MMDrawerController/MMDrawerBarButtonItem.m; sourceTree = SOURCE_ROOT; };
+		E51E47F653EF43C3B5235A17 /* FUISegmentedControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FUISegmentedControl.h; path = ../FlatUI/Classes/ios/FUISegmentedControl.h; sourceTree = SOURCE_ROOT; };
+		E5D654BF8A5B43409EAB4DDA /* UIColor+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+FlatUI.m"; path = "../FlatUI/Classes/ios/UIColor+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		E9AF9C9AE1704D88A0C6F602 /* UIBarButtonItem+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+FlatUI.m"; path = "../FlatUI/Classes/ios/UIBarButtonItem+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		EC23986C805B48C282E2FDDF /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-HairlineItalic.ttf"; path = "../FlatUI/Resources/Lato-HairlineItalic.ttf"; sourceTree = SOURCE_ROOT; };
+		EE787D7D621D446FB5AD00A0 /* UIFont+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIFont+FlatUI.m"; path = "../FlatUI/Classes/ios/UIFont+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		F02619FE4F9444BD8951EC1E /* Lato-Italic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../FlatUI/Resources/Lato-Italic.ttf"; sourceTree = SOURCE_ROOT; };
+		F62D21B325D24F288D5099E0 /* FUICellBackgroundView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FUICellBackgroundView.h; path = ../FlatUI/Classes/ios/FUICellBackgroundView.h; sourceTree = SOURCE_ROOT; };
+		FAC5D5CA1F8B4D1AA6EFF9EC /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+FlatUI.m"; path = "../FlatUI/Classes/ios/UITableViewCell+FlatUI.m"; sourceTree = SOURCE_ROOT; };
+		FF6AF17759E742EFBD07DF79 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = SOURCE_ROOT; };
+		FFA1A3A92D1040D28464CFF7 /* Pods-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-prefix.pch"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D920D772147409EB0807F26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6F3F12A43D540FDB55D7958 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		068B41B6B7AD4EF99AC5EE34 /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				9E4239C6C5754360B26E0AF4 /* DDAbstractDatabaseLogger.h */,
+				DF55393773774A69B3C96070 /* DDAbstractDatabaseLogger.m */,
+				65FB55AD9003469DAC54EFB0 /* DDASLLogger.h */,
+				948419EE40B64251AB15769A /* DDASLLogger.m */,
+				6D282C6801B04F4F9106A9A8 /* DDFileLogger.h */,
+				86E11F98449746A68A44B24B /* DDFileLogger.m */,
+				1831B3797A214D5786D10759 /* DDLog.h */,
+				1A142D51E7EC4326BFFCC982 /* DDLog.m */,
+				A7D770D501B14D0AAC08A5D7 /* DDTTYLogger.h */,
+				8603E5B4CC11421D8C7EA0E1 /* DDTTYLogger.m */,
+			);
+			name = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		15F7A1735DD64412B43AFFC2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				696EE23DE7BC49C4AF797CFF /* MMDrawerController.h */,
+				4AF080381BC448BBA0373533 /* MMDrawerController.m */,
+				66BCC2818CB64C3CB93D0291 /* UIViewController+MMDrawerController.h */,
+				8B31F89B1A664B20AC7A902A /* UIViewController+MMDrawerController.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		2AF8B486F79F42629A329C39 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				34B68ADF459B4FF5A00322E3 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		34B68ADF459B4FF5A00322E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C482A69E72F4F0B99B0C329 /* Pods.xcconfig */,
+				9A55205076A54509B4A9AF0E /* Pods-environment.h */,
+				FFA1A3A92D1040D28464CFF7 /* Pods-prefix.pch */,
+				14D5558A109A4494B08DCFF0 /* Pods-resources.sh */,
+				660DBF871657426AA4497220 /* Pods-acknowledgements.plist */,
+				DCAE259F92544EDDAAC8476F /* Pods-acknowledgements.markdown */,
+				FF6AF17759E742EFBD07DF79 /* Pods-dummy.m */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		367D3A99BDD244479084B8DE /* FlatUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				276CCDF84A60453EB1312B51 /* Lato-Black.ttf */,
+				1E5785C0F3B64FF1976BAB17 /* Lato-BlackItalic.ttf */,
+				2A85FAD1AF504118ADF739AB /* Lato-Bold.ttf */,
+				3D3E9DEA936E44549BC1B51D /* Lato-BoldItalic.ttf */,
+				CA02A4E8CA2D479E818EB91D /* Lato-Hairline.ttf */,
+				EC23986C805B48C282E2FDDF /* Lato-HairlineItalic.ttf */,
+				F02619FE4F9444BD8951EC1E /* Lato-Italic.ttf */,
+				C4D99E9A56BA49D98FE41E97 /* Lato-Light.ttf */,
+				D7DF38B555BA46948F461677 /* Lato-LightItalic.ttf */,
+				907B89E8CAF14849835CFB31 /* Lato-Regular.ttf */,
+			);
+			name = FlatUIKit;
+			sourceTree = "<group>";
+		};
+		59F0EB24C363459892C19A25 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				367D3A99BDD244479084B8DE /* FlatUIKit */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		648185EF31E54B3A96B98E28 /* MMDrawerBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				192AFFED431341A9A41D05A3 /* MMDrawerBarButtonItem.h */,
+				E4FB37CBEC664C65AE832F05 /* MMDrawerBarButtonItem.m */,
+			);
+			name = MMDrawerBarButtonItem;
+			sourceTree = "<group>";
+		};
+		6D31672D3BD64AEAAB8EA23E = {
+			isa = PBXGroup;
+			children = (
+				8E6A708875D448118DC3996D /* Frameworks */,
+				92136EB085724BD1ACDAB8A5 /* Local Pods */,
+				A2706DB8682C497198360892 /* Pods */,
+				7861E6B1E87149A4A7262C57 /* Products */,
+				59F0EB24C363459892C19A25 /* Resources */,
+				2AF8B486F79F42629A329C39 /* Targets Support Files */,
+				33D22F237337480591CB8375 /* Podfile */,
+			);
+			sourceTree = "<group>";
+		};
+		71C964D867A441D9840CFFEF /* MMDrawerVisualStates */ = {
+			isa = PBXGroup;
+			children = (
+				5D9F89D5B8504D2C8B89450A /* MMDrawerVisualState.h */,
+				31F5E41932D14FF1957FD007 /* MMDrawerVisualState.m */,
+			);
+			name = MMDrawerVisualStates;
+			sourceTree = "<group>";
+		};
+		7861E6B1E87149A4A7262C57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5943A726EE9D4247867169EB /* libPods.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E6A708875D448118DC3996D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EF11F18160E40EDA5A792C6 /* CoreText.framework */,
+				6E1C94EFCB7F4273AF2FEA6B /* Foundation.framework */,
+				B8597A5207BE4A84801AC8CA /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92136EB085724BD1ACDAB8A5 /* Local Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E3E37903F4804862AB374DBD /* FlatUIKit */,
+			);
+			name = "Local Pods";
+			sourceTree = "<group>";
+		};
+		A2706DB8682C497198360892 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				068B41B6B7AD4EF99AC5EE34 /* CocoaLumberjack */,
+				C1E878D4F7BA48F4B5BAB413 /* MMDrawerController */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C1E878D4F7BA48F4B5BAB413 /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				15F7A1735DD64412B43AFFC2 /* Core */,
+				648185EF31E54B3A96B98E28 /* MMDrawerBarButtonItem */,
+				71C964D867A441D9840CFFEF /* MMDrawerVisualStates */,
+			);
+			name = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		E3E37903F4804862AB374DBD /* FlatUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				371CE395A45147768A1D91AA /* FlatUIKit.h */,
+				69B53F43F9214AA68A9B777C /* FUIAlertView.h */,
+				359CB882D90045BC890CEFA0 /* FUIAlertView.m */,
+				82A20E76E7A94BE8BBA32BA1 /* FUIButton.h */,
+				50E80D1C170649A98EE25E55 /* FUIButton.m */,
+				F62D21B325D24F288D5099E0 /* FUICellBackgroundView.h */,
+				30351595053842F0952D762A /* FUICellBackgroundView.m */,
+				E51E47F653EF43C3B5235A17 /* FUISegmentedControl.h */,
+				310FBCB7AF5942988CE9E189 /* FUISegmentedControl.m */,
+				30A866E4EC9041B790D6256C /* FUISwitch.h */,
+				7D98E75B34084C6B81DF6684 /* FUISwitch.m */,
+				45B193DE1BB54CA2BBFC1DDE /* UIBarButtonItem+FlatUI.h */,
+				E9AF9C9AE1704D88A0C6F602 /* UIBarButtonItem+FlatUI.m */,
+				3A097399F1E845D28C485760 /* UIColor+FlatUI.h */,
+				E5D654BF8A5B43409EAB4DDA /* UIColor+FlatUI.m */,
+				82568A5B8078439991BD2323 /* UIFont+FlatUI.h */,
+				EE787D7D621D446FB5AD00A0 /* UIFont+FlatUI.m */,
+				CAFAEF7618AB423DB9AF67D7 /* UIImage+FlatUI.h */,
+				A415A271747A4076A797D550 /* UIImage+FlatUI.m */,
+				5C2F7E405B104059B750E1FB /* UINavigationBar+FlatUI.h */,
+				D8A423A7860E414DBB133310 /* UINavigationBar+FlatUI.m */,
+				637FBE5DC0704668BAAB93A7 /* UIProgressView+FlatUI.h */,
+				BA26694436A64ADCAAC34785 /* UIProgressView+FlatUI.m */,
+				7AD0989998C9426A80697B03 /* UISlider+FlatUI.h */,
+				50F2C5564F8D4B58B0E099FE /* UISlider+FlatUI.m */,
+				9DEAC6148214451885676E1D /* UIStepper+FlatUI.h */,
+				237CADA04D5A44069789EFC8 /* UIStepper+FlatUI.m */,
+				302CF08844594E798F537AC4 /* UITabBar+FlatUI.h */,
+				8B9F16E82F074BE4A5C67933 /* UITabBar+FlatUI.m */,
+				6734E38B0CA942FCAC938F97 /* UITableViewCell+FlatUI.h */,
+				FAC5D5CA1F8B4D1AA6EFF9EC /* UITableViewCell+FlatUI.m */,
+			);
+			name = FlatUIKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D7FE74DF4BFC40B29B7DCB86 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A98C1EEA90DC49FD8F0AD580 /* DDAbstractDatabaseLogger.h in Headers */,
+				AB94B192570B44398200A2D5 /* DDASLLogger.h in Headers */,
+				9F26C8D5A8124053AD8F7798 /* DDFileLogger.h in Headers */,
+				974471651D9D4097BACC81CD /* DDLog.h in Headers */,
+				907570F159284D319E655A00 /* DDTTYLogger.h in Headers */,
+				A0A2E7FF25D74763BE195736 /* FlatUIKit.h in Headers */,
+				CD0ED64C3592440C9B4EABFD /* FUIAlertView.h in Headers */,
+				971DFC6C57214D10A4736665 /* FUIButton.h in Headers */,
+				DF400AC4847C417D826AC8B7 /* FUICellBackgroundView.h in Headers */,
+				A6732E1CF4CD471DB45A0C15 /* FUISegmentedControl.h in Headers */,
+				DEFCA5DA4974408E925065A2 /* FUISwitch.h in Headers */,
+				0832A63F7E974CDA9E5568F7 /* UIBarButtonItem+FlatUI.h in Headers */,
+				5E90C5D181F24149B689F4F4 /* UIColor+FlatUI.h in Headers */,
+				BD5B56C8BA1248979B080ABE /* UIFont+FlatUI.h in Headers */,
+				D80AB9AA7FAF4A8DB1F0A55C /* UIImage+FlatUI.h in Headers */,
+				BA40CFA91DED4C638816DAD6 /* UINavigationBar+FlatUI.h in Headers */,
+				ACEB0A4AEFA14869BFA3BF89 /* UIProgressView+FlatUI.h in Headers */,
+				1B9A37B48AA74734AF234AC8 /* UISlider+FlatUI.h in Headers */,
+				10EDC463679C4537B3EB6B2F /* UIStepper+FlatUI.h in Headers */,
+				A4DAD1F3A126412D9D53EBF5 /* UITabBar+FlatUI.h in Headers */,
+				B0E8D11B5AA0444FBE33BF8D /* UITableViewCell+FlatUI.h in Headers */,
+				1450AD596C9A4E03BD6842A9 /* MMDrawerController.h in Headers */,
+				03498091FC1347C78B034CA3 /* UIViewController+MMDrawerController.h in Headers */,
+				B76A50A4A8C2424A9168966E /* MMDrawerBarButtonItem.h in Headers */,
+				D80D139BD8F84DC0BA607A22 /* MMDrawerVisualState.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		30FA97A13D624D91818FB217 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 400062E1B51C40908CC00E04 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				3BFB18D5364E4D09ADD5FCF3 /* Sources */,
+				0D920D772147409EB0807F26 /* Frameworks */,
+				D7FE74DF4BFC40B29B7DCB86 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 5943A726EE9D4247867169EB /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21F52C638A0E44E49441906B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
+			buildConfigurationList = D267D921E4BB4DADB91877BC /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D31672D3BD64AEAAB8EA23E;
+			productRefGroup = 7861E6B1E87149A4A7262C57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30FA97A13D624D91818FB217 /* Pods */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3BFB18D5364E4D09ADD5FCF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDC56B8E3C8F455EAE67D75D /* DDAbstractDatabaseLogger.m in Sources */,
+				1A2A571AF9254E618E092120 /* DDASLLogger.m in Sources */,
+				8930940BB34C46F4AA6CA451 /* DDFileLogger.m in Sources */,
+				9BDC97C29BDE48D5AD2CE3AB /* DDLog.m in Sources */,
+				332F5880CE1E4FC4AFD3C1CA /* DDTTYLogger.m in Sources */,
+				B5F05E3F781C411788084F82 /* FUIAlertView.m in Sources */,
+				14672617226D4C988672AB98 /* FUIButton.m in Sources */,
+				3C0F67FC98554701B3911B45 /* FUICellBackgroundView.m in Sources */,
+				59D6C97DD95546699702AC55 /* FUISegmentedControl.m in Sources */,
+				564CBB0B6AF94217BFA5FD26 /* FUISwitch.m in Sources */,
+				61429C5225D140A683C680F0 /* UIBarButtonItem+FlatUI.m in Sources */,
+				DA76B1C33EB74B33BE2B5AFA /* UIColor+FlatUI.m in Sources */,
+				D3AA5DAB25F34220BF55E9C8 /* UIFont+FlatUI.m in Sources */,
+				D9833031833B44FFACA13E80 /* UIImage+FlatUI.m in Sources */,
+				CBFDA9F2036E481F9834C5CC /* UINavigationBar+FlatUI.m in Sources */,
+				023D27FB13DE4407959EE981 /* UIProgressView+FlatUI.m in Sources */,
+				460F6AE66BB04B3393DA8503 /* UISlider+FlatUI.m in Sources */,
+				B1DDFB2FA4994A3FB90EA623 /* UIStepper+FlatUI.m in Sources */,
+				FE4C811497774060A6B7BF13 /* UITabBar+FlatUI.m in Sources */,
+				AA7DCB94772A4F17A4AA4FBE /* UITableViewCell+FlatUI.m in Sources */,
+				2E93E269694C4C4497CE55A5 /* MMDrawerController.m in Sources */,
+				1B405A8E23D94EE3A663A3BF /* UIViewController+MMDrawerController.m in Sources */,
+				7F01DB30C8F74F5297CAC955 /* MMDrawerBarButtonItem.m in Sources */,
+				5EBBCE373C0E4DE1A0C93A6D /* MMDrawerVisualState.m in Sources */,
+				FE8915F5D68144E3A56EB29B /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2014F6D38B0D44A39F90A644 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		257266B0E884410392A94359 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C482A69E72F4F0B99B0C329 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "";
+				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
+				PODS_ROOT = "${SRCROOT}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		42A66DBFF5774415A13DE45C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C482A69E72F4F0B99B0C329 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
+				PODS_ROOT = "${SRCROOT}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6696E90EF9E24B5C918D6E46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		400062E1B51C40908CC00E04 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42A66DBFF5774415A13DE45C /* Release */,
+				257266B0E884410392A94359 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D267D921E4BB4DADB91877BC /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2014F6D38B0D44A39F90A644 /* Release */,
+				6696E90EF9E24B5C918D6E46 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21F52C638A0E44E49441906B /* Project object */;
+}
