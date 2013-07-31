@@ -27,6 +27,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
     // 加载用户配置
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger typeNum = [userDefaults integerForKey:@"rynthm_type"];
@@ -35,10 +36,14 @@
         [userDefaults setInteger:typeNum forKey:@"rynthm_type"];
     }
 
-    BOOL shouldShowIntro = [userDefaults boolForKey:@"should_show_intro"];
-    if (shouldShowIntro == 0) {
+    NSString *showIntroSettingString = [userDefaults stringForKey:@"should_show_intro"];
+    BOOL firstTime = NO;
+    BOOL shouldShowIntro = NO;
+    if (showIntroSettingString == nil) {
+        firstTime = YES;
         shouldShowIntro = YES;
-        [userDefaults setBool:shouldShowIntro forKey:@"should_show_intro"];
+    } else {
+        shouldShowIntro = [showIntroSettingString boolValue];
     }
 
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -53,14 +58,20 @@
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [drawerController setMaximumLeftDrawerWidth:screenBounds.size.width / 2];
     // 不打开手势触发菜单
-    //[drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    //[drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeTapCenterView];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
 
-    if (shouldShowIntro) [self showIntro];
+    //if (shouldShowIntro) {
+        if (firstTime) {
+            showIntroSettingString = @"0";
+            [userDefaults setObject:showIntroSettingString forKey:@"should_show_intro"];
+        }
+        [self showIntro];
+    //}
 
     // 自定义主题色调
     UINavigationBar *themeNavBar = [UINavigationBar appearance];
@@ -72,7 +83,7 @@
 
     //[(UITableView *)[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
     //[(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [application setStatusBarHidden:NO];
+    //[application setStatusBarHidden:NO];
 
     return YES;
 }
@@ -81,11 +92,11 @@
 {
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @""
                                                           withDetail: @"每一天苦乐相伴，在忘却之前\n简单的指尖滑动，时光留下回声"
-                                                           withImage: nil];
+                                                           withImage: [UIImage imageNamed:@"intro2.png"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @""
                                                           withDetail: @"乐音起伏，追忆似水流年\n不同的节奏，相同的感动"
-                                                           withImage:nil];
+                                                           withImage: [UIImage imageNamed:@"intro3.png"]];
 
     [page0.detailLabel setFont:[UIFont flatFontOfSize:19.0f]];
     [page1.detailLabel setFont:[UIFont flatFontOfSize:19.0f]];
@@ -93,7 +104,7 @@
     page1.detailLabel.textAlignment = NSTextAlignmentCenter;
     
     KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
-    
+
     vc.introView.backgroundColor = [UIColor midnightBlueColor];
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;
@@ -186,7 +197,12 @@
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                   configuration:nil
+                                                             URL:storeURL
+                                                         options:nil
+                                                           error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -194,7 +210,7 @@
          
          Typical reasons for an error here include:
          * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
+         * The schema for the persistent store is incompatible with current     managed object model.
          Check the error message to determine what the actual problem was.
          
          
@@ -208,11 +224,11 @@
          @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
          
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
+        */
+
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }    
+    }
     
     return _persistentStoreCoordinator;
 }

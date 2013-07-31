@@ -32,6 +32,7 @@
 */
 
 #import "KxIntroView.h"
+#import "UIColor+FlatUI.h"
 #import <QuartzCore/QuartzCore.h>
 
 static float addDegrees(float delta, float deg)
@@ -122,6 +123,7 @@ static float addDegrees(float delta, float deg)
         [self addSubview:_pageControl];
         
         _closeButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_closeButton setTitleColor:[UIColor emerlandColor] forState:UIControlStateNormal];
         _closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:isPhone ? 16 : 20];
         [_closeButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closeIntro) forControlEvents:UIControlEventTouchUpInside];

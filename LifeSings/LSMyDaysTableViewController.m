@@ -169,13 +169,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
             [mutableArray insertObject:today atIndex:0];
         }
     }
-    
-    // LSMyDays level up
-    if ([mutableArray count] == 2) {
-        // first archivement
-        // TODO: alert?
-        
-    }
+
     _myDaysArray = mutableArray;
     [self.tableView reloadData]; // 重新刷新tableview
 }

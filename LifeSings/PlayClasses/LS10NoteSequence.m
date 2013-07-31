@@ -16,6 +16,7 @@
 - (id)initWithNotesArray:(NSArray *)notesArr  {
     self = [super initWithNotesArray:notesArr];
     _skipper = 1;
+    self.speedUnit = .2f;
     return self;
 }
 
