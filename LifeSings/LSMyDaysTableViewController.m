@@ -5,6 +5,7 @@
 //  Created by lichong on 13-7-3.
 //  Copyright (c) 2013年 Apple Inc. All rights reserved.
 //
+#include "Log-Prefix.pch"
 #import <QuartzCore/QuartzCore.h>
 
 #import "LSManagedObjectContextHelper.h"
@@ -18,8 +19,6 @@
 
 #import "MMDrawerBarButtonItem.h"
 #import "UIViewController+MMDrawerController.h"
-#import "LSNoteSequence.h"
-#import "LSNoteSequencePlayer.h"
 #import "LS10NoteSequence.h"
 #import "LS001NoteSequence.h"
 #import "LS220000NoteSequence.h"
@@ -59,7 +58,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor emerlandColor],
             UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateNormal];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor lightTextColor],
-            UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateSelected];
+            UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateHighlighted];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor clearColor],
             UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateDisabled];
 
@@ -71,6 +70,8 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [leftDrawerButton setMenuButtonColor:[UIColor lightTextColor] forState:UIControlStateSelected];
     [leftDrawerButton setMenuButtonColor:[UIColor emerlandColor] forState:UIControlStateNormal];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+    
+    [self loadLSMyDaysWithDuration:365];
     
     // add notification listener when the app comes from background to foreground
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -105,7 +106,8 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 #pragma mark - Observer handler
 - (void)becomeActive:(NSNotification *)notification {
     // TODO: 从用户配置里读取时间跨度
-    [self loadLSMyDaysWithDuration:365]; // 一年？
+    //[self loadLSMyDaysWithDuration:365]; // 一年？
+    [self.tableView reloadData];
 }
 
 #pragma mark - Data logic
@@ -114,38 +116,24 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
  */
 - (void)loadLSMyDaysWithDuration:(NSUInteger)duration
 {
-    /*
-	 Fetch existing LSMyDays.
-	 Create a fetch request for the Event entity; add a sort descriptor; then execute the fetch.
-	 */
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"LSMyDay" inManagedObjectContext:self.managedObjectContext];
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-	[request setFetchBatchSize:duration];
+    dispatch_async(dispatch_get_main_queue(), ^{
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date<=%@", [NSDate date]];
+        // Execute the fetch.
+        NSError *error;
+        
+        [self.fetchedResultsController.fetchRequest setFetchBatchSize:duration];
+        if (self.fetchedResultsController)
+        {
+            if (![[self fetchedResultsController] performFetch:&error])
+            {
+                DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            }
+        }
     
-    // Order the events by creation date, most recent first.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-	NSArray *sortDescriptors = @[sortDescriptor];
-	[request setSortDescriptors:sortDescriptors];
-    [request setPredicate:predicate];
-    //    [request setPropertiesToFetch:[NSArray arrayWithObjects:@"forDate",@"blackValue",@"whiteValue", nil]];
-    //[request setResultType:NSDictionaryResultType];
-    
-	// Execute the fetch.
-	NSError *error;
-	NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:request error:&error];
-	if (fetchResults == nil) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-	}
-    
-	// Set self's events array to a mutable copy of the fetch results.
-	[self setMyDaysArray:[fetchResults mutableCopy]];
+        // Set self's events array to a mutable copy of the fetch results.
+        [self setMyDaysArray:[self.fetchedResultsController.fetchedObjects mutableCopy]];
+    });
 }
 
 /**
@@ -296,7 +284,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
     // Get the black/white day corresponding to the current index path and configure the table view cell.
     LSMyDay *aDay = (LSMyDay *)self.myDaysArray[indexPath.row];
-    //NSLog(@"--->%d", LSMyDay.blackValue);
+    //DDLogVerbose(@"--->%d", LSMyDay.blackValue);
     [cell configureWithMyDay: aDay];
     return cell;
 }
@@ -356,6 +344,48 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
+}
+
+#pragma mark -
+#pragma mark Fetched results controller
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    /*
+	 Fetch existing LSMyDays.
+	 Create a fetch request for the Event entity; add a sort descriptor; then execute the fetch.
+	 */
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"LSMyDay" inManagedObjectContext:self.managedObjectContext];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+	//[request setFetchBatchSize:duration];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date<=%@", [NSDate date]];
+    
+    // Order the events by creation date, most recent first.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	NSArray *sortDescriptors = @[sortDescriptor];
+	[request setSortDescriptors:sortDescriptors];
+    [request setPredicate:predicate];
+    //    [request setPropertiesToFetch:[NSArray arrayWithObjects:@"forDate",@"blackValue",@"whiteValue", nil]];
+    //[request setResultType:NSDictionaryResultType];
+    
+    // Edit the section name key path and cache name if appropriate,
+    // nil for section name key path means "no sections"
+    NSFetchedResultsController *aFetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:self.managedObjectContext
+                                          sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    //aFetchedResultsController.delegate = self;
+    _fetchedResultsController = aFetchedResultsController;
+    
+    return _fetchedResultsController;
 }
 
 @end

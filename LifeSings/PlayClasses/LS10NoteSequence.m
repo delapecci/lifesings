@@ -5,7 +5,7 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
+#include "Log-Prefix.pch"
 #import "LS10NoteSequence.h"
 
 
@@ -24,10 +24,10 @@
     int _curr_skipper = _skipper;
     _skipper++;
     if (_curr_skipper % 3 == 2) {
-        NSLog(@"Skip %d", _curr_skipper);
+        DDLogVerbose(@"Skip %d", _curr_skipper);
         return -1;
     } else {
-        NSLog(@"%d", _curr_skipper);
+        DDLogVerbose(@"%d", _curr_skipper);
         return [super nextNote];
     }
 }

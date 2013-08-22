@@ -1,4 +1,4 @@
-
+#include "Log-Prefix.pch"
 #import <AudioToolbox/AudioToolbox.h>
 #import "SoundBankPlayer.h"
 #import "OpenALSupport.h"
@@ -139,7 +139,7 @@ Note;
 	NSArray *array = [NSArray arrayWithContentsOfFile:path];
 	if (array == nil)
 	{
-		NSLog(@"Could not load sound bank '%@'", path);
+		DDLogError(@"Could not load sound bank '%@'", path);
 		return;
 	}
 
@@ -249,7 +249,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 		ALenum error;
 		if ((error = alGetError()) != AL_NO_ERROR)
 		{
-			NSLog(@"Error generating OpenAL buffer: %x", error);
+            DDLogError(@"Error generating OpenAL buffer: %x", error);
 			return;
 		}
 
@@ -257,7 +257,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 		NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:nil];
 		if (url == nil)
 		{
-			NSLog(@"Could not find file '%@'", filename);
+            DDLogError(@"Could not find file '%@'", filename);
 			return;
 		}
 
@@ -268,7 +268,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 		if (_buffers[t].data == NULL)
 		{
-			NSLog(@"Error loading sound");
+            DDLogError(@"Error loading sound");
 			return;
 		}
 
@@ -276,7 +276,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 		if ((error = alGetError()) != AL_NO_ERROR)
 		{
-			NSLog(@"Error attaching audio to buffer: %x", error);
+            DDLogError(@"Error attaching audio to buffer: %x", error);
 			return;
 		}
 	}
@@ -304,7 +304,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 		ALenum error;
 		if ((error = alGetError()) != AL_NO_ERROR) 
 		{
-			NSLog(@"Error generating OpenAL source: %x", error);
+            DDLogError(@"Error generating OpenAL source: %x", error);
 			return;
 		}
 
@@ -357,7 +357,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 {
 	if (!_initialized)
 	{
-		NSLog(@"SoundBankPlayer is not initialized yet");
+        DDLogError(@"SoundBankPlayer is not initialized yet");
 		return;
 	}
 
@@ -390,7 +390,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 			ALenum error = alGetError();
 			if (error != AL_NO_ERROR)
 			{
-				NSLog(@"Error attaching buffer to source: %x", error);
+                DDLogError(@"Error attaching buffer to source: %x", error);
 				return;
 			}
 		}
@@ -415,14 +415,14 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 	ALenum error = alGetError();
 	if (error != AL_NO_ERROR)
-		NSLog(@"Error starting source: %x", error);
+        DDLogError(@"Error starting source: %x", error);
 }
 
 - (void)noteOff:(int)midiNoteNumber
 {
 	if (!_initialized)
 	{
-		NSLog(@"SoundBankPlayer is not initialized yet");
+        DDLogError(@"SoundBankPlayer is not initialized yet");
 		return;
 	}
 
@@ -436,7 +436,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 			ALenum error = alGetError();
 			if (error != AL_NO_ERROR)
-				NSLog(@"Error stopping source: %x", error);
+                DDLogError(@"Error stopping source: %x", error);
 		}
 	}
 }
@@ -445,7 +445,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 {
 	if (!_initialized)
 	{
-		NSLog(@"SoundBankPlayer is not initialized yet");
+        DDLogError(@"SoundBankPlayer is not initialized yet");
 		return;
 	}
 
@@ -457,7 +457,7 @@ static void InterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 		ALenum error = alGetError();
 		if (error != AL_NO_ERROR)
-			NSLog(@"Error stopping source: %x", error);
+            DDLogError(@"Error stopping source: %x", error);
 	}
 }
 

@@ -5,7 +5,7 @@
 //  Created by lichong on 13-7-3.
 //  Copyright (c) 2013年 Apple Inc. All rights reserved.
 //
-
+#include "Log-Prefix.pch"
 #import "LSMyDayTableViewCell.h"
 #import "UIColor+FlatUI.h"
 #import "UISlider+FlatUI.h"
@@ -48,14 +48,6 @@
     
     [self.smileSlider setMinimumTrackImage:progressImage forState:UIControlStateNormal];
     [self.smileSlider setMaximumTrackImage:trackImage forState:UIControlStateNormal];
-    
-//    [self.smileSlider configureFlatSliderWithTrackColor:[UIColor blackColor]
-//                                          progressColor:[UIColor whiteColor]
-//                                       thumbColorNormal:[UIColor clearColor]
-//                                  thumbColorHighlighted:[UIColor clearColor]
-//                                           cornerRadius:0.0];
-//    self.smileSlider.layer.borderWidth = .5f;
-//    self.smileSlider.layer.borderColor = [UIColor darkGrayColor].CGColor;
     [self.smileSlider addTarget:self action:@selector(changeSlider:) forControlEvents:UIControlEventTouchUpInside];
 
     NSDate *currentDate = [NSDate date];
@@ -84,7 +76,7 @@
 -(void)changeSlider:(id)sender {
     UISlider *slider=(UISlider *)sender;
     float sliderValue=(float)(slider.value );
-    //NSLog(@"sliderValue = %f",sliderValue);
+    //DDLogVerbose(@"sliderValue = %f",sliderValue);
     
     LSMyDay *toSaveLSMyDay = self.myDay;
     toSaveLSMyDay.smileValue = sliderValue;
@@ -95,7 +87,7 @@
 	if (![[LSManagedObjectContextHelper getDefaultMOC] save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
 	}
 }

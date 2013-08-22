@@ -10,8 +10,6 @@
         <scene sceneID="I6J-fr-6PL">
             <objects>
                 <navigationController id="uIN-DO-hGA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="时光如歌" image="days.png" id="XWW-zT-RSA"/>
-                    <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uqp-SZ-2mr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -93,9 +91,6 @@
             <point key="canvasLocation" x="-872" y="-2709"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="days.png" width="48" height="32"/>
-    </resources>
     <classes>
         <class className="LSMyDayTableViewCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LSMyDayTableViewCell.h"/>

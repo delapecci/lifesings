@@ -10,5 +10,6 @@
 #import "LSNoteSequencePlayer.h"
 
 @interface LSMyDaysTableViewController : UITableViewController<SequencePlayerDelegate>
-@property (nonatomic) NSManagedObjectContext *managedObjectContext;	   
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

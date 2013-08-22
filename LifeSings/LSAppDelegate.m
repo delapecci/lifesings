@@ -36,15 +36,7 @@
         [userDefaults setInteger:typeNum forKey:@"rynthm_type"];
     }
 
-    NSString *showIntroSettingString = [userDefaults stringForKey:@"should_show_intro"];
-    BOOL firstTime = NO;
-    BOOL shouldShowIntro = NO;
-    if (showIntroSettingString == nil) {
-        firstTime = YES;
-        shouldShowIntro = YES;
-    } else {
-        shouldShowIntro = [showIntroSettingString boolValue];
-    }
+    //NSString *showIntroSettingString = [userDefaults stringForKey:@"should_show_intro"];
 
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *mainNavViewController = [mainStoryBoard instantiateInitialViewController];
@@ -65,19 +57,12 @@
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
 
-    //if (shouldShowIntro) {
-        if (firstTime) {
-            showIntroSettingString = @"0";
-            [userDefaults setObject:showIntroSettingString forKey:@"should_show_intro"];
-        }
-        [self showIntro];
-    //}
+    [self showIntro];
 
     // 自定义主题色调
     UINavigationBar *themeNavBar = [UINavigationBar appearance];
     [themeNavBar configureFlatNavigationBarWithColor:[UIColor midnightBlueColor]];
     [themeNavBar setShadowImage:[UIImage imageWithColor:[UIColor greenSeaColor] cornerRadius:1.0f]];
-    //NSValue *offsetValue = [NSValue valueWithUIOffset: UIOffsetMake(-0.3f, 0.2f)];
     themeNavBar.titleTextAttributes = @{UITextAttributeFont: [UIFont flatFontOfSize:21.0f],
             UITextAttributeTextColor: [UIColor whiteColor]};
 
