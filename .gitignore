@@ -1,12 +1,6 @@
 
 .idea/.name
 
-*.pbxproj
-
-LifeSings.xcodeproj/project.pbxproj
-
-LifeSings.xcodeproj/xcuserdata/lic.xcuserdatad/xcschemes/LifeSings.xcscheme
-
 *.iml
 
 .idea/encodings.xml
