@@ -71,8 +71,6 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [leftDrawerButton setMenuButtonColor:[UIColor emerlandColor] forState:UIControlStateNormal];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
     
-    [self loadLSMyDaysWithDuration:365];
-    
     // add notification listener when the app comes from background to foreground
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(becomeActive:)
@@ -89,6 +87,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    _soundBankPlayer = nil;
 }
 
 - (void)awakeFromNib {
@@ -106,8 +105,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 #pragma mark - Observer handler
 - (void)becomeActive:(NSNotification *)notification {
     // TODO: 从用户配置里读取时间跨度
-    //[self loadLSMyDaysWithDuration:365]; // 一年？
-    [self.tableView reloadData];
+    [self loadLSMyDaysWithDuration:365]; // 一年？
 }
 
 #pragma mark - Data logic

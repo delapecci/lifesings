@@ -58,7 +58,11 @@
     [self.window makeKeyAndVisible];
 
     [self showIntro];
+    [self initTheme];
+    return YES;
+}
 
+- (void) initTheme {
     // 自定义主题色调
     UINavigationBar *themeNavBar = [UINavigationBar appearance];
     [themeNavBar configureFlatNavigationBarWithColor:[UIColor midnightBlueColor]];
@@ -69,8 +73,6 @@
     //[(UITableView *)[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
     //[(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[application setStatusBarHidden:NO];
-
-    return YES;
 }
 
 - (void) showIntro
