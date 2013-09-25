@@ -83,7 +83,7 @@
         const BOOL isPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
         
         _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _detailLabel.font = [UIFont systemFontOfSize:isPhone ? 16 : 22];
+        _detailLabel.font = [UIFont systemFontOfSize:isPhone ? 18 : 22];
         _detailLabel.textColor = [UIColor whiteColor];
         _detailLabel.textAlignment = NSTextAlignmentCenter;
         _detailLabel.numberOfLines = 0;

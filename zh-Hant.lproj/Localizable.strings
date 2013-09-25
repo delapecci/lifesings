@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  LifeSings
+
+  Created by lichong on 13-7-26.
+  Copyright (c) 2013 Li Chong. All rights reserved.
+*/
+"Close"="開始";
+"IntroTitle1"="每一天苦樂相伴，在忘卻之前\n簡單的指尖滑動，時光留下回聲";
+"IntroTitle2"="樂音起伏，追憶似水流年\n不同的節奏，相同的感動";
+
+"DateFormatStr"="M月d日";
+"Today"="今天";
+"Yesterday"="昨天";
+"DayBeforeYesterday"="前天";
+
+"RynthmType"="節奏型";
+"RynthmName"="節奏%d";
+
+"AppTitle"="時光留聲";
+"Listen"="聆聽";

@@ -6,3 +6,16 @@
   Copyright (c) 2013 Li Chong. All rights reserved.
 */
 "Close"="开始";
+"IntroTitle1"="每一天苦乐相伴，在忘却之前\n简单的指尖滑动，时光留下回声";
+"IntroTitle2"="乐音起伏，追忆似水流年\n不同的节奏，相同的感动";
+
+"DateFormatStr"="M月d日";
+"Today"="今天";
+"Yesterday"="昨天";
+"DayBeforeYesterday"="前天";
+
+"RynthmType"="节奏型";
+"RynthmName"="节奏%d";
+
+"AppTitle"="时光留声";
+"Listen"="聆听";

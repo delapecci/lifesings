@@ -74,7 +74,7 @@
     }
     
     // Configure the cell...
-    NSString *rynthmName = [NSString stringWithFormat:@"节奏%d", indexPath.row + 1];
+    NSString *rynthmName = [NSString stringWithFormat:NSLocalizedString(@"RynthmName", nil), indexPath.row + 1];
     [cell.textLabel setText:rynthmName];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger typeNum = [userDefaults integerForKey:@"rynthm_type"];
@@ -87,7 +87,7 @@
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"节奏型";
+    return NSLocalizedString(@"RynthmType", nil);
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

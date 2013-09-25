@@ -51,10 +51,12 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self.tableView setBackgroundColor:[UIColor cloudsColor]];
 
     // 自定义导航按钮外观
+    self.navigationItem.title = NSLocalizedString(@"AppTitle", nil);
+    self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Listen", nil);
     [self.navigationItem.rightBarButtonItem configureFlatButtonWithColor:[UIColor clearColor]
                                                         highlightedColor:[UIColor clearColor]
                                                             cornerRadius:0.0f];

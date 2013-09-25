@@ -48,7 +48,7 @@
 
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *mainNavViewController = [mainStoryBoard instantiateInitialViewController];
-
+    
     UIViewController * leftSideDrawerViewController = [[LSLeftSideMenuViewController alloc] init];
     MMDrawerController * drawerController = [[MMDrawerController alloc]
     initWithCenterViewController:mainNavViewController
@@ -98,11 +98,11 @@
 - (void) showIntro
 {
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @""
-                                                          withDetail: @"每一天苦乐相伴，在忘却之前\n简单的指尖滑动，时光留下回声"
+                                                          withDetail: NSLocalizedString(@"IntroTitle1", nil)
                                                            withImage: [UIImage imageNamed:@"intro2.png"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @""
-                                                          withDetail: @"乐音起伏，追忆似水流年\n不同的节奏，相同的感动"
+                                                          withDetail: NSLocalizedString(@"IntroTitle2", nil)
                                                            withImage: [UIImage imageNamed:@"intro3.png"]];
 
     [page0.detailLabel setFont:[UIFont flatFontOfSize:19.0f]];

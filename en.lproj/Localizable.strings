@@ -6,3 +6,16 @@
   Copyright (c) 2013 Li Chong. All rights reserved.
 */
 "Close"="Start";
+"IntroTitle1"="Before forgetting one day\nRecord its tone\nwith one finger touch";
+"IntroTitle2"="After a period\nListen the song of memories\nbe touched";
+
+"DateFormatStr"="M/d";
+"Today"="Today";
+"Yesterday"="YDAY";
+"DayBeforeYesterday"="DBY";
+
+"RynthmType"="Rynthm Type";
+"RynthmName"="Rynthm%d";
+
+"AppTitle"="Life Sings";
+"Listen"="Listen";

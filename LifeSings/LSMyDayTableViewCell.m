@@ -54,20 +54,25 @@
     NSInteger diffDays = [LSDateHelper daysDiffBetweenDate:myDay.date andDate:currentDate];
     DDLogInfo(@"diffDays=%d", diffDays);
     if (diffDays < 3) {
-        self.dateLabel.font = [UIFont flatFontOfSize:25];
+        NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+        // 中文环境时，设置字体更大
+        if ([language isEqualToString:@"zh-Hans"] || [language isEqualToString:@"zh-Hant"])
+            self.dateLabel.font = [UIFont flatFontOfSize:25];
+        else
+            self.dateLabel.font = [UIFont flatFontOfSize:16];
         self.smileSlider.userInteractionEnabled = YES;
     } else {
         self.smileSlider.userInteractionEnabled = NO;
     }
     if (diffDays == 0) {
         self.dateLabel.textColor = [UIColor emerlandColor];
-        self.dateLabel.text = @"今天";
+        self.dateLabel.text = NSLocalizedString( @"Today", nil);
     } else if (diffDays == 1) {
         self.dateLabel.textColor = [UIColor greenSeaColor];
-        self.dateLabel.text = @"昨天";
+        self.dateLabel.text = NSLocalizedString( @"Yesterday", nil);
     } else if (diffDays == 2) {
         self.dateLabel.textColor = [UIColor greenSeaColor];
-        self.dateLabel.text = @"前天";
+        self.dateLabel.text = NSLocalizedString( @"DayBeforeYesterday", nil);
     } else {
         self.dateLabel.font = [UIFont flatFontOfSize:15];
         self.dateLabel.textColor = [UIColor darkTextColor];
@@ -108,7 +113,7 @@ static NSDateFormatter *sDateFormatter = nil;
 {
 	if (sDateFormatter == nil) {
 		sDateFormatter = [[NSDateFormatter alloc] init];
-		[sDateFormatter setDateFormat:@"M月d日"];
+		[sDateFormatter setDateFormat:NSLocalizedString(@"DateFormatStr", nil)];
 	}
     return sDateFormatter;
 }
