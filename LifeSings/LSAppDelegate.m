@@ -18,6 +18,7 @@
 
 #import "LSLeftSideMenuViewController.h"
 #import "MMDrawerController.h"
+#import "DDFileLogger.h"
 
 @implementation LSAppDelegate
 
@@ -27,6 +28,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+//    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+//    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+//    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+//
+//    [DDLog addLogger:fileLogger];
+    [self initTheme];
 
     // 加载用户配置
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -40,12 +48,12 @@
 
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *mainNavViewController = [mainStoryBoard instantiateInitialViewController];
-    
+
     UIViewController * leftSideDrawerViewController = [[LSLeftSideMenuViewController alloc] init];
     MMDrawerController * drawerController = [[MMDrawerController alloc]
-                                             initWithCenterViewController:mainNavViewController
-                                             leftDrawerViewController:leftSideDrawerViewController
-                                             rightDrawerViewController:nil];
+    initWithCenterViewController:mainNavViewController
+    leftDrawerViewController:leftSideDrawerViewController
+    rightDrawerViewController:nil];
 
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [drawerController setMaximumLeftDrawerWidth:screenBounds.size.width / 2];
@@ -56,9 +64,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        
+        [application setStatusBarStyle:UIStatusBarStyleLightContent];
+        
+        self.window.clipsToBounds =YES;
+        
+        self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+        
+        //added on 19th Sep
+        self.window.bounds = CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height);
+    }
 
     [self showIntro];
-    [self initTheme];
     return YES;
 }
 
@@ -73,6 +92,7 @@
     //[(UITableView *)[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
     //[(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[application setStatusBarHidden:NO];
+    
 }
 
 - (void) showIntro

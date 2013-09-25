@@ -6,13 +6,6 @@
 <img src="http://mutualmobile.github.io/MMDrawerController/ExampleImages/example2.png" width="266" height="500"/>
 </p>
 
-<!-- MacBuildServer Install Button -->
-<p align="center" >
-    <a href="http://macbuildserver.com/project/github/build/?xcode_project=KitchenSink%2FMMDrawerControllerKitchenSink.xcodeproj&amp;target=MMDrawerControllerKitchenSink&amp;repo_url=git%3A%2F%2Fgithub.com%2Fmutualmobile%2FMMDrawerController.git&amp;build_conf=Release" target="_blank"><img src="http://com.macbuildserver.github.s3-website-us-east-1.amazonaws.com/button_up.png" align="center"/><br/><sup><a href="http://macbuildserver.com/github/opensource/" target="_blank">by MacBuildServer</a></sup></a>
-</p>
-<!-- MacBuildServer Install Button -->
-
-
 ---
 ##Documentation
 Official appledoc documentation can be found at [CocoaDocs](http://cocoadocs.org/docsets/MMDrawerController/).
@@ -23,7 +16,7 @@ Official appledoc documentation can be found at [CocoaDocs](http://cocoadocs.org
 You can install MMDrawerController in your project by using [CocoaPods](https://github.com/cocoapods/cocoapods):
 
 ```Ruby
-pod 'MMDrawerController', '~> 0.2.1'
+pod 'MMDrawerController', '~> 0.4.0'
 ```
 
 ---
@@ -54,6 +47,7 @@ MMDrawerController * drawerController = [[MMDrawerController alloc]
  * **MMOpenDrawerGestureModePanningNavigationBar**: The user can open the drawer by panning anywhere on the navigation bar.
  * **MMOpenDrawerGestureModePanningCenterView**: The user can open the drawer by panning anywhere on the center view.
  * **MMOpenDrawerGestureModeBezelPanningCenterView**: The user can open the drawer by starting a pan anywhere within 20 points of the bezel.
+ * **MMOpenDrawerGestureModeCustom**: The developer can provide a callback block to determine if the gesture should be recognized. More information below.
 
 * **MMCloseDrawerGestureMode**
  * **MMCloseDrawerGestureModePanningNavigationBar**: The user can close the drawer by panning anywhere on the navigation bar.
@@ -62,8 +56,29 @@ MMDrawerController * drawerController = [[MMDrawerController alloc]
  * **MMCloseDrawerGestureModeTapNavigationBar**: The user can close the drawer by tapping the navigation bar.
  * **MMCloseDrawerGestureModeTapCenterView**: The user can close the drawer by tapping the center view.
  * **MMCloseDrawerGestureModePanningDrawerView**: The user can close the drawer by panning anywhere on the drawer view.
+ * **MMCloseDrawerGestureModeCustom**: The developer can provide a callback block to determine if the gesture should be recognized. More information below.
  
 You are free to set whatever combination you want for opening and closing. Note that these gestures may impact touches sent to the child view controllers, so be sure to use these appropriately for your application. For example, you wouldn't want `MMOpenDrawerGestureModePanningCenterView` set if a `MKMapView` is your center view controller, since it would intercept the pan meant for moving around the map.
+
+####Custom Gesture Recognizer Support
+Starting with version 0.3.0, you can now provide a callback block to determine if a gesture should be recognized using the `setGestureShouldRecognizeTouchBlock:` method. This method provides three parameters - the drawer controller, the gesture, and the touch. As a developer, you are responsible for inspecting those elements and determining if the gesture should be recognized or not. Note the block is only consulted if you have set `MMOpenDrawerGestureModeCustom`/`MMCloseDrawerGestureModeCustom` on the appropriate mask.
+
+For example, lets say you have a center view controller that contains a few elements, and you only want the pan gesture to be recognized to open the drawer when the touch begins within a certain subview. You would make sure that the `openDrawerGestureModeMask` contains `MMOpenDrawerGestureModeCustom`, and you could set a block below as so:
+
+```Objective-C
+[myDrawerController
+ setGestureShouldRecognizeTouchBlock:^BOOL(MMDrawerController *drawerController, UIGestureRecognizer *gesture, UITouch *touch) {
+     BOOL shouldRecognizeTouch = NO;
+     if(drawerController.openSide == MMDrawerSideNone &&
+        [gesture isKindOfClass:[UIPanGestureRecognizer class]]){
+         UIView * customView = [drawerController.centerViewController myCustomSubview];
+         CGPoint location = [touch locationInView:customView];
+         shouldRecognizeTouch = (CGRectContainsPoint(customView.bounds, location));
+     }
+     return shouldRecognizeTouch;
+ }];
+ ```
+ Note that you would not want the `openDrawerGestureModeMask` to contain `MMOpenDrawerGestureModePanningCenterView`, since that would take over and be applied automatically regardless of where the touch begins within the center view.
 
 ###Custom Drawer Open/Close Animations
 `MMDrawerController` provides a callback block that allows you to implement your own custom state for the drawer controller when an open/close or pan gesture event happens. Within the block, you are responsible for updating the visual state of the drawer controller, and the drawer controller will handle animating to that state.
@@ -80,7 +95,7 @@ For example, to set the alpha of the side drawer controller from 0 to 1 during a
 		 else if(drawerSide == MMDrawerSideRight){
 			 sideDrawerViewController = drawerController.rightDrawerViewController;
 		 }
-		 [sideDrawerViewController setAlpha:percentVisible];
+		 [sideDrawerViewController.view setAlpha:percentVisible];
      }];
 ```
 
@@ -95,6 +110,15 @@ When a drawer is open, you can control how a user can interact with the center v
 
 ###Accessing the Drawer Controller from a Child View Controller
 You can use the `UIViewController+MMDrawerController` category in order to query the drawerController directly from child view controllers.
+
+###State Restoration
+Beginning with 0.4.0, `MMDrawerController` supports iOS state restoration. In order to opt in to state restoration for `MMDrawerController`, you must set the `restorationIdentifier` of your drawer controller. Instances of your `centerViewController`, `leftDrawerViewController` and `rightDrawerViewController` must also be configured with their own `restorationIdentifier` (and optionally a restorationClass) if you intend for those to be restored as well. If your MMDrawerController had an open drawer when your app was sent to the background, that state will also be restored.
+
+---
+##Subclassing
+If you plan to subclass `MMDrawerController`, import `MMDrawerController+Subclass.h` into your subclass to access protected methods for `MMDrawerController.` Note that several methods assume and require you to call super, so be sure to follow that convention.
+
+If there is specific functionality you need that is not supported by these methods, please open a Github issue explaining your needs and we can try and find a way to open up methods that can help you out.
 
 ---
 ##Bells and Whistles

@@ -17,4 +17,19 @@
     
     return [diffComps day];
 }
+
++ (NSDate *)dateWithoutTime:(NSDate *)dateWithTime
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:dateWithTime];
+    NSDate *todayDateWithoutTime = [calendar dateFromComponents:components];
+    return todayDateWithoutTime;
+}
+
++ (NSDate *)rollDays:(NSInteger)offset fromDate:(NSDate *)date {
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSDateComponents *rollDaysComponents = [[NSDateComponents alloc] init];
+    rollDaysComponents.day = offset;
+    return [currentCalendar dateByAddingComponents:rollDaysComponents toDate:date options:0];
+}
 @end

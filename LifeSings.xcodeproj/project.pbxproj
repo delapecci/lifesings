@@ -182,7 +182,6 @@
 		02E48D4E17963D0E00A4C8FC /* MMSideDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSideDrawerTableViewCell.m; sourceTree = "<group>"; };
 		02E48D5017963D4C00A4C8FC /* MMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewCell.h; sourceTree = "<group>"; };
 		02E48D5117963D4C00A4C8FC /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
-		02F1C0D117A1103000421E8B /* LifeSings.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LifeSings.entitlements; sourceTree = "<group>"; };
 		1A286025AF61B7576B7EEA93 /* LS001NoteSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LS001NoteSequence.h; sourceTree = "<group>"; };
 		1A28605A972ADC99AE817D4B /* LSNoteSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSNoteSequence.m; sourceTree = "<group>"; };
 		1A28609CF2DBC52980DD1D6F /* LS220000NoteSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LS220000NoteSequence.m; sourceTree = "<group>"; };
@@ -288,7 +287,6 @@
 		020C0099178E524C006645D9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				02F1C0D117A1103000421E8B /* LifeSings.entitlements */,
 				02E137D717A10CFD00DD90BB /* Icon@2x.png */,
 				02E137D517A10CF000DD90BB /* Icon.png */,
 				02CC9EEB17A21B5D00C26EA0 /* Localizable.strings */,
@@ -526,6 +524,11 @@
 				CLASSPREFIX = LS;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Li Chong";
+				TargetAttributes = {
+					020C008C178E524C006645D9 = {
+						DevelopmentTeam = 3NV46C4W8T;
+					};
+				};
 			};
 			buildConfigurationList = 020C0088178E524C006645D9 /* Build configuration list for PBXProject "LifeSings" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -800,7 +803,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B6CF3C5EDD34D50A276DA2C /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chong Li (3NV46C4W8T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chong Li (3NV46C4W8T)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LifeSings/LifeSings-Prefix.pch";

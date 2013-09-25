@@ -21,6 +21,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -29,7 +30,7 @@
 {
     [super viewDidLoad];
     
-    [self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    //[self.tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 //    [self.tableView setSeparatorColor:[UIColor colorWithRed:49.0/255.0
 //                                                      green:54.0/255.0
 //                                                       blue:57.0/255.0
@@ -40,7 +41,8 @@
                                                         blue:80.0/255.0
                                                        alpha:1.0]];
 
-    // TODO:读取前一次的菜单配置
+    [self.tableView setScrollEnabled:NO];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,7 +98,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 33.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+        return 53.0;
+    else
+        return 33.0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -15,4 +15,11 @@
  */
 + (NSInteger)daysDiffBetweenDate:(NSDate *)expectedEarlierDate andDate:(NSDate *)expectedFutureDate;
 
+/**
+ * 转换指定日期为不带时间不分的日期
+ */
++ (NSDate *)dateWithoutTime:(NSDate *)dateWithTime;
+
++ (NSDate *)rollDays:(NSInteger)offset fromDate:(NSDate *)date;
+
 @end

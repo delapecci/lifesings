@@ -22,6 +22,7 @@
 #import "LS10NoteSequence.h"
 #import "LS001NoteSequence.h"
 #import "LS220000NoteSequence.h"
+#import "LSDateHelper.h"
 
 @interface LSMyDaysTableViewController ()
 @property (nonatomic) NSMutableArray *myDaysArray;
@@ -30,6 +31,8 @@
 @end
 
 @implementation LSMyDaysTableViewController {
+    LSNoteSequencePlayer *_sequencePlayer;
+    UITapGestureRecognizer *_tapGestureRecognizer;
 }
 
 // 时光曲初始音阶序列
@@ -59,7 +62,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
             UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateNormal];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor lightTextColor],
             UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateHighlighted];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor clearColor],
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor blackColor],
             UITextAttributeFont: [UIFont boldSystemFontOfSize:15.0f]} forState:UIControlStateDisabled];
 
     [self.navigationItem.leftBarButtonItem configureFlatButtonWithColor:[UIColor clearColor]
@@ -114,7 +117,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
  */
 - (void)loadLSMyDaysWithDuration:(NSUInteger)duration
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_async(dispatch_get_main_queue(), ^{
     
         // Execute the fetch.
         NSError *error;
@@ -131,7 +134,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     
         // Set self's events array to a mutable copy of the fetch results.
         [self setMyDaysArray:[self.fetchedResultsController.fetchedObjects mutableCopy]];
-    });
+    //});
 }
 
 /**
@@ -139,20 +142,59 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
  */
 - (void)setMyDaysArray:(NSMutableArray *)mutableArray
 {
-    LSMyDay *today = NULL;
+    NSDate *today = [NSDate new];
     if ([mutableArray count] == 0) {
-        today = [self makeLSMyDayForDate:[self todayWithoutTime] withSmileValue:16];
-        [mutableArray insertObject:today atIndex:0];
+        // 补充今天、昨天、前天数据
+        [mutableArray insertObject:[self makeLSMyDayForDate:
+        [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-2 fromDate:today]] withSmileValue:16] atIndex:0];
+        [mutableArray insertObject:[self makeLSMyDayForDate:
+                [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-1 fromDate:today]] withSmileValue:16] atIndex:0];
+        [mutableArray insertObject:[self makeLSMyDayForDate:[LSDateHelper dateWithoutTime:today] withSmileValue:16] atIndex:0];
     } else {
         LSMyDay *firstLSMyDay = mutableArray[0];
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyyMMdd"];
-        NSString *firstDateStr = [dateFormat stringFromDate: firstLSMyDay.date];
-        NSString *expectedDateStr = [dateFormat stringFromDate:[NSDate date]];
-        if ([firstDateStr isEqual:expectedDateStr] != YES) {
-            // add new today ata
-            today = [self makeLSMyDayForDate:[self todayWithoutTime] withSmileValue:16];
-            [mutableArray insertObject:today atIndex:0];
+        NSInteger firstDiff = [LSDateHelper daysDiffBetweenDate:firstLSMyDay.date andDate:today];
+        if (firstDiff > 2) {
+            // 第一项是前天之前的
+            // 补充今天，昨天，前天数据
+            [mutableArray insertObject:[self makeLSMyDayForDate:
+                    [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-2 fromDate:today]] withSmileValue:16] atIndex:0];
+            [mutableArray insertObject:[self makeLSMyDayForDate:
+                    [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-1 fromDate:today]] withSmileValue:16] atIndex:0];
+            [mutableArray insertObject:[self makeLSMyDayForDate:[LSDateHelper dateWithoutTime:today] withSmileValue:16] atIndex:0];
+        } else if (firstDiff == 2) {
+            // 第一项是前天
+            // 补充昨天，今天数据
+            [mutableArray insertObject:[self makeLSMyDayForDate:
+                    [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-1 fromDate:today]] withSmileValue:16] atIndex:0];
+            [mutableArray insertObject:[self makeLSMyDayForDate:
+                    [LSDateHelper dateWithoutTime:today] withSmileValue:16] atIndex:0];
+        } else if (firstDiff == 1) {
+            // 第一项是昨天
+            // 尝试检测第二项是否为前天数据
+            LSMyDay *secondLSMyDay = mutableArray[1];
+            if ([LSDateHelper daysDiffBetweenDate:secondLSMyDay.date andDate:today] > 2) {
+                // 补充前天数据
+                [mutableArray insertObject:[self makeLSMyDayForDate:
+                        [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-2 fromDate:today]] withSmileValue:16] atIndex:1];
+            }
+            [mutableArray insertObject:[self makeLSMyDayForDate:[LSDateHelper dateWithoutTime:today] withSmileValue:16] atIndex:0];
+        } else {
+            // 第一项是今天
+            // 尝试检测第二项是否为昨天数据
+            LSMyDay *secondLSMyDay = mutableArray[1];
+            NSInteger secondDiff = [LSDateHelper daysDiffBetweenDate:secondLSMyDay.date andDate:today];
+            if (secondDiff > 1) {
+                // 缺少昨天
+                // 补充昨天数据
+                [mutableArray insertObject:[self makeLSMyDayForDate:
+                        [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-1 fromDate:today]] withSmileValue:16] atIndex:1];
+                if (secondDiff > 2) {
+                    // 缺少前天
+                    // 补充前天数据
+                    [mutableArray insertObject:[self makeLSMyDayForDate:
+                            [LSDateHelper dateWithoutTime:[LSDateHelper rollDays:-2 fromDate:today]] withSmileValue:16] atIndex:2];
+                }
+            }
         }
     }
 
@@ -160,16 +202,9 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [self.tableView reloadData]; // 重新刷新tableview
 }
 
-- (NSDate *)todayWithoutTime
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:[NSDate date]];
-    NSDate *todayDateWithoutTime = [calendar dateFromComponents:components];
-    return todayDateWithoutTime;
-}
-
 - (LSMyDay *)makeLSMyDayForDate:(NSDate *)date withSmileValue:(NSInteger)smileValue {
-    LSMyDay *today = (LSMyDay *)[NSEntityDescription insertNewObjectForEntityForName:@"LSMyDay" inManagedObjectContext:self.managedObjectContext];
+    LSMyDay *today = (LSMyDay *)[NSEntityDescription insertNewObjectForEntityForName:@"LSMyDay"
+                                                              inManagedObjectContext:self.managedObjectContext];
     today.smileValue = smileValue;
     today.date = date;
     return today;
@@ -184,9 +219,25 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [sender setEnabled:NO];
     [self.navigationItem.leftBarButtonItem setEnabled:NO];
     LSNoteSequence *sequence = [self makeNoteSequence];
-    LSNoteSequencePlayer *sequencePlayer = [[LSNoteSequencePlayer alloc] initWithNoteSequence:sequence andSpeed:sequence.speedUnit];
-    sequencePlayer.delegate = self;
-    [sequencePlayer play];
+    _sequencePlayer = [[LSNoteSequencePlayer alloc] initWithNoteSequence:sequence andSpeed:sequence.speedUnit];
+    _sequencePlayer.delegate = self;
+    DDLogInfo(@"Play");
+    [_sequencePlayer play];
+}
+
+- (void)installStopPlayListener {
+    if (_tapGestureRecognizer == nil)
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToStopPlay:)];
+    [self.tableView addGestureRecognizer:_tapGestureRecognizer];
+}
+
+- (void)uninstallStopPlayListener {
+    [self.tableView removeGestureRecognizer:_tapGestureRecognizer];
+    _tapGestureRecognizer = nil;
+}
+
+- (void)tapToStopPlay:(UITapGestureRecognizer *)sender {
+    [_sequencePlayer stop];
 }
 
 /**
@@ -230,15 +281,19 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 - (void)willPlayNoteAtIndex:(NSInteger)index {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
                           atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(index) inSection:0]].contentView.backgroundColor = [UIColor silverColor];
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor clearColor];
+    [self.tableView cellForRowAtIndexPath:
+            [NSIndexPath indexPathForRow:(index) inSection:0]].contentView.backgroundColor = [UIColor silverColor];
+    [self.tableView cellForRowAtIndexPath:
+            [NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)willStarPlayAtIndex:(NSInteger)index {
-    // TODO:是否应该停用菜单
+    [self installStopPlayListener];
 }
 
 - (void)didStopPlayAtIndex:(NSInteger)index {
+    [self uninstallStopPlayListener];
+    _sequencePlayer = nil; // release
     [self.playMusicButton setEnabled:YES];
     [self.navigationItem.leftBarButtonItem setEnabled:YES];
     [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor clearColor];
@@ -246,10 +301,8 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
                           atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
-    // 返回第一行
-    //
-
-#pragma mark - Table view data source
+#pragma mark -
+#pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -260,9 +313,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSUInteger fetchedCnt = [self.myDaysArray count];
-    // FIXME: default show today, but if there is not today, should plus 1
-    return fetchedCnt > 0 ? fetchedCnt : 1;
+    return [self.myDaysArray count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -279,10 +330,11 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 		cell = [[LSMyDayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
     cell.delegate = self;
+    cell.backgroundColor = [UIColor cloudsColor];
 
     // Get the black/white day corresponding to the current index path and configure the table view cell.
     LSMyDay *aDay = (LSMyDay *)self.myDaysArray[indexPath.row];
-    //DDLogVerbose(@"--->%d", LSMyDay.blackValue);
+    DDLogVerbose(@"--->%d", aDay.smileValue);
     [cell configureWithMyDay: aDay];
     return cell;
 }

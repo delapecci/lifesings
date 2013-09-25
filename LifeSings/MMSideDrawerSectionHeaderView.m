@@ -37,8 +37,10 @@
                                                  green:79.0/255.0
                                                   blue:80.0/255.0
                                                  alpha:1.0]];
-        
-        _label = [[UILabel alloc] initWithFrame:CGRectInset(self.bounds, 10.0, 2.0)];
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7)
+            _label = [[UILabel alloc] initWithFrame:CGRectInset(self.bounds, 10.0, 2.0)];
+        else
+            _label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 20.0, self.bounds.size.width, self.bounds.size.height)];
         [self.label setFont:[UIFont boldSystemFontOfSize:15.0]];
         [self.label setBackgroundColor:[UIColor clearColor]];
         [self.label setTextColor:[UIColor colorWithRed:203.0/255.0

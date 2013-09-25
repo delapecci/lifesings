@@ -1,20 +1,23 @@
 PODS:
   - CocoaLumberjack (1.6.2)
   - FlatUIKit (1.1)
-  - MMDrawerController (0.2.1):
+  - MMDrawerController (0.4.0):
     - MMDrawerController/Core
     - MMDrawerController/MMDrawerBarButtonItem
     - MMDrawerController/MMDrawerVisualStates
-  - MMDrawerController/Core (0.2.1)
-  - MMDrawerController/MMDrawerBarButtonItem (0.2.1):
+    - MMDrawerController/Subclass
+  - MMDrawerController/Core (0.4.0)
+  - MMDrawerController/MMDrawerBarButtonItem (0.4.0):
     - MMDrawerController/Core
-  - MMDrawerController/MMDrawerVisualStates (0.2.1):
+  - MMDrawerController/MMDrawerVisualStates (0.4.0):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.4.0):
     - MMDrawerController/Core
 
 DEPENDENCIES:
   - CocoaLumberjack
   - FlatUIKit (from `FlatUI`)
-  - MMDrawerController (~> 0.2.1)
+  - MMDrawerController (~> 0.4.0)
 
 EXTERNAL SOURCES:
   FlatUIKit:
@@ -23,6 +26,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
   FlatUIKit: 3b15b582ffcfa4e392bedc4d3c5461f9b11c1cc2
-  MMDrawerController: 4fa1e3452a66c85fdb7b06668520c403d0356009
+  MMDrawerController: 44baaee6b79487b4681eb61597fb790586909c0c
 
 COCOAPODS: 0.19.1

@@ -41,10 +41,15 @@
     });
 }
 
+- (void) stop {
+    [self stopTimer];
+}
+
 # pragma mark - Play days music timer
 - (void)startTimer
 {
     _playIndex = 0;
+    [self.delegate willStarPlayAtIndex:0];
     _playTimer = [NSTimer scheduledTimerWithTimeInterval:_speed  // 500 ms
                                                   target:self
                                                 selector:@selector(handleTimer:)

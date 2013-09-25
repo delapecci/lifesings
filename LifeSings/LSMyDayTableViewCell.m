@@ -52,9 +52,12 @@
 
     NSDate *currentDate = [NSDate date];
     NSInteger diffDays = [LSDateHelper daysDiffBetweenDate:myDay.date andDate:currentDate];
-    
+    DDLogInfo(@"diffDays=%d", diffDays);
     if (diffDays < 3) {
         self.dateLabel.font = [UIFont flatFontOfSize:25];
+        self.smileSlider.userInteractionEnabled = YES;
+    } else {
+        self.smileSlider.userInteractionEnabled = NO;
     }
     if (diffDays == 0) {
         self.dateLabel.textColor = [UIColor emerlandColor];
@@ -68,14 +71,13 @@
     } else {
         self.dateLabel.font = [UIFont flatFontOfSize:15];
         self.dateLabel.textColor = [UIColor darkTextColor];
-        self.smileSlider.userInteractionEnabled = NO;
     }
 }
 
 #pragma mark - Events handler
 -(void)changeSlider:(id)sender {
     UISlider *slider=(UISlider *)sender;
-    float sliderValue=(float)(slider.value );
+    int sliderValue=(int)(slider.value );
     //DDLogVerbose(@"sliderValue = %f",sliderValue);
     
     LSMyDay *toSaveLSMyDay = self.myDay;
