@@ -19,6 +19,8 @@
 
 LifeSings.xcworkspace/xcuserdata/lic.xcuserdatad/UserInterfaceState.xcuserstate
 
+Pods/Documentation/*
+
 Pods/Documentation/MMDrawerController/docset-installed.txt
 
 Pods/Documentation/MMDrawerController/docset/Contents/Info.plist
