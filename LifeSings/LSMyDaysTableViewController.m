@@ -13,6 +13,7 @@
 #import "LSMyDayTableViewCell.h"
 
 #import "UIColor+FlatUI.h"
+#import "UIImage+FlatUI.h"
 #import "UIBarButtonItem+FlatUI.h"
 
 #import "LSSoundPlayerUtil.h"
@@ -24,7 +25,11 @@
 #import "LS220000NoteSequence.h"
 #import "LSDateHelper.h"
 
-@interface LSMyDaysTableViewController ()
+#import "TSMessage.h"
+#import "POVoiceHUD.h"
+#import "SoundManager.h"
+
+@interface LSMyDaysTableViewController () <POVoiceHUDDelegate, VoiceMemoDelegate>
 @property (nonatomic) NSMutableArray *myDaysArray;
 @property (nonatomic) SoundBankPlayer *soundBankPlayer;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *playMusicButton;
@@ -33,6 +38,13 @@
 @implementation LSMyDaysTableViewController {
     LSNoteSequencePlayer *_sequencePlayer;
     UITapGestureRecognizer *_tapGestureRecognizer;
+    UIView *_playingOverlayView;
+    NSIndexPath *_changedCellIndexPath; // 记录当前处于滑块菜单状态的cell位置
+    
+    POVoiceHUD *_voiceHud;
+    NSIndexPath *_recordingCellIndexPath; //正在录音的cell位置
+
+    NSInteger _visibleYear;
 }
 
 // 时光曲初始音阶序列
@@ -53,6 +65,8 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [super viewDidLoad];
     
     [self.tableView setBackgroundColor:[UIColor cloudsColor]];
+    self.tableView.rowHeight = [self rowHeight];
+    self.navigationController.navigationBar.clipsToBounds = NO;
 
     // 自定义导航按钮外观
     self.navigationItem.title = NSLocalizedString(@"AppTitle", nil);
@@ -76,16 +90,25 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [leftDrawerButton setMenuButtonColor:[UIColor emerlandColor] forState:UIControlStateNormal];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
     
+    // 初始化voicehud view
+    _voiceHud = [[POVoiceHUD alloc] initWithParentView:self.tableView];
+    _voiceHud.title = @"";
+    [_voiceHud setDelegate:self];
+    [self.tableView addSubview:_voiceHud];
+
     // add notification listener when the app comes from background to foreground
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(becomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSDate *now = [NSDate new];
+    _visibleYear = [LSDateHelper yearOfDate:now];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,8 +120,8 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (void)awakeFromNib {
     // Create the player and tell it which sound bank to use.
-//    _soundBankPlayer = [[SoundBankPlayer alloc] init];
-//    [_soundBankPlayer setSoundBank:@"Piano"];
+    _soundBankPlayer = [[SoundBankPlayer alloc] init];
+    [_soundBankPlayer setSoundBank:@"Piano"];
     _managedObjectContext = [LSManagedObjectContextHelper getDefaultMOC];
 }
 
@@ -112,7 +135,6 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     // TODO: 从用户配置里读取时间跨度
     [self loadLSMyDaysWithDuration:365]; // 一年？
 }
-
 #pragma mark - Data logic
 /**
  * 获取指定天数跨度的日子
@@ -219,6 +241,20 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (IBAction)playDays:(id)sender {
     [sender setEnabled:NO];
+    
+    // 恢复cell滑块
+    if (_changedCellIndexPath) {
+        [((SWTableViewCell *)[self.tableView cellForRowAtIndexPath:_changedCellIndexPath]) hideUtilityButtonsAnimated:YES];
+    }
+    
+    if (!_playingOverlayView) {
+        _playingOverlayView = [[UIView alloc]init];
+    }
+    _playingOverlayView.frame = CGRectMake(self.tableView.bounds.origin.x, self.tableView.bounds.origin.y, self.tableView.bounds.size.width, self.tableView.bounds.size.height * [_myDaysArray count] / 7);
+    _playingOverlayView.backgroundColor = [UIColor clearColor];
+    [self.tableView addSubview:_playingOverlayView];
+    self.tableView.scrollEnabled = NO;
+    
     [self.navigationItem.leftBarButtonItem setEnabled:NO];
     LSNoteSequence *sequence = [self makeNoteSequence];
     _sequencePlayer = [[LSNoteSequencePlayer alloc] initWithNoteSequence:sequence andSpeed:sequence.speedUnit];
@@ -286,7 +322,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     [self.tableView cellForRowAtIndexPath:
             [NSIndexPath indexPathForRow:(index) inSection:0]].contentView.backgroundColor = [UIColor silverColor];
     [self.tableView cellForRowAtIndexPath:
-            [NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor clearColor];
+            [NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor cloudsColor];
 }
 
 - (void)willStarPlayAtIndex:(NSInteger)index {
@@ -298,9 +334,12 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     _sequencePlayer = nil; // release
     [self.playMusicButton setEnabled:YES];
     [self.navigationItem.leftBarButtonItem setEnabled:YES];
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor clearColor];
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(index  -1) inSection:0]].contentView.backgroundColor = [UIColor cloudsColor];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                           atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [_playingOverlayView removeFromSuperview];
+    _playingOverlayView = nil; //GC
+    self.tableView.scrollEnabled = YES;
 }
 
 #pragma mark -
@@ -308,7 +347,6 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
@@ -320,35 +358,55 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (self.tableView.frame.size.height) / 7;
+    // FIXME: 非nib的cell高度如何根据cell数量来动态调整？
+    return [self rowHeight];
+}
+
+- (CGFloat)rowHeight
+{
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (screenSize.height > 480.0f) {
+            return 83.66f;
+        } else {
+            return 69.0f;
+        }
+    }
+    return (self.tableView.bounds.size.height - 2) / 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"LSMyDayCell";
     LSMyDayTableViewCell *cell = (LSMyDayTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-	{
-		cell = [[LSMyDayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-	}
-    cell.delegate = self;
-    cell.backgroundColor = [UIColor cloudsColor];
-
     // Get the black/white day corresponding to the current index path and configure the table view cell.
     LSMyDay *aDay = (LSMyDay *)self.myDaysArray[indexPath.row];
+    if (cell == nil)
+	{
+        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+        NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+		cell = [[LSMyDayTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                           reuseIdentifier:CellIdentifier
+                                       containingTableView:self.tableView // Used for row height and selection
+                                        leftUtilityButtons:leftUtilityButtons
+                                       rightUtilityButtons:rightUtilityButtons];
+	} else {
+        [cell resetRightUtilityButtons];
+    }
+
+    cell.delegate = self;
     DDLogVerbose(@"--->%d", aDay.smileValue);
     [cell configureWithMyDay: aDay];
     return cell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
 
 /*
 // Override to support editing the table view.
@@ -384,6 +442,7 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -439,5 +498,160 @@ const int notes[8] = {48,50,52,53,55,57,59,60};
     
     return _fetchedResultsController;
 }
+    
+#pragma mark - scrollview事件代理
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+    {
+        NSArray* cells = self.tableView.visibleCells;
+        NSDate *firstVisibleCellDayDate = ((LSMyDayTableViewCell *)[cells firstObject]).myDay.date;
+        if (firstVisibleCellDayDate != nil) {
+            NSInteger visibleDaysYear = [LSDateHelper yearOfDate:firstVisibleCellDayDate];
+            if (visibleDaysYear != _visibleYear) {
+                _visibleYear = visibleDaysYear;
+                [TSMessage showNotificationInViewController:self
+                                                      title:[NSString stringWithFormat: NSLocalizedString(@"VisibleYear", nil),_visibleYear]
+                                                   subtitle:nil
+                                                       type:TSMessageNotificationTypeMessage
+                                                   duration:3.0f
+                                                   callback:nil
+                                                buttonTitle:nil
+                                             buttonCallback:nil
+                                                 atPosition:TSMessageNotificationPositionTop
+                                        canBeDismisedByUser:YES];
+            }
+        }
+    }
+
+#pragma mark - cell内滑块值变化协议处理
+- (void)onSliderValueChanged:(int)newVal
+{
+    int notePos = newVal % 8;
+    int noteGrade = newVal / 8;
+    int note = noteGrade * 12 + notes[notePos];
+    [_soundBankPlayer noteOn:note gain:.6f];
+}
+
+#pragma mark - cell左侧滑出按钮事件
+-(void)swippableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
+{
+    if (index == 0) {
+
+    }
+}
+    
+-(void)swippableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+//    switch (index) {
+//        case 0: {
+//            LSMyDay *toRecordDay = ((LSMyDayTableViewCell *)cell).myDay;
+//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//            [formatter setDateFormat: @"yyyyMMdd"];
+//            NSString *voiceMemoFileName = [NSString stringWithFormat:@"%@.caf", [formatter stringFromDate:toRecordDay.date]];
+//            // 弹出录音提示
+//            [_voiceHud startForFilePath:[NSString stringWithFormat:@"%@/Documents/%@",
+//                            NSHomeDirectory(), voiceMemoFileName]];
+//
+//            _recordingCellIndexPath = [self.tableView indexPathForCell:cell];
+//            break;
+//        }
+//        case 1: {
+//            LSMyDay *toRecordDay = ((LSMyDayTableViewCell *)cell).myDay;
+//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//            [formatter setDateFormat: @"yyyyMMdd"];
+//            NSString *voiceMemoFileName = [NSString stringWithFormat:@"%@.caf", [formatter stringFromDate:toRecordDay.date]];
+//            // 弹出录音提示
+//            NSString *voiceMemoPath = [NSString stringWithFormat:@"%@/Documents/%@",
+//                                                                 NSHomeDirectory(), voiceMemoFileName];
+//
+//            // 播放语音
+//            if (![SoundManager sharedManager].isPlayingMusic)
+//                [[SoundManager sharedManager] playMusic:voiceMemoPath looping:NO];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+}
+
+- (void)swippableTableViewCell:(SWTableViewCell *)cell didUtilityButtonVisiblilityChanged:(BOOL)visible
+{
+    NSIndexPath *indexPathOfThisCell = [self.tableView indexPathForCell:cell];
+    if (_changedCellIndexPath && indexPathOfThisCell.row != _changedCellIndexPath.row) {
+        [((SWTableViewCell *)[self.tableView cellForRowAtIndexPath:_changedCellIndexPath]) hideUtilityButtonsAnimated:YES];
+    }
+    if ([SoundManager sharedManager].isPlayingMusic)
+        [[SoundManager sharedManager] stopMusic:NO];
+    if (visible == YES)
+        _changedCellIndexPath = [self.tableView indexPathForCell:cell];
+    else
+        _changedCellIndexPath = nil;
+}
+    
+#pragma mark - 录音hud代理
+- (void)POVoiceHUD:(POVoiceHUD *)voiceHUD voiceRecorded:(NSString *)recordPath length:(float)recordLength {
+    NSLog(@"Sound recorded with file %@ for %.2f seconds", [recordPath lastPathComponent], recordLength);
+    LSMyDayTableViewCell *recordingCell = (LSMyDayTableViewCell *)[self.tableView cellForRowAtIndexPath:_recordingCellIndexPath];
+    LSMyDay *toRecordDay = recordingCell.myDay;
+    toRecordDay.voiceMemoName = [recordPath lastPathComponent];
+    toRecordDay.voiceMemoDuration = recordLength;
+    // 保存数据
+    NSError *error;
+    if (![[LSManagedObjectContextHelper getDefaultMOC] save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    // 预先准备声音
+    [[SoundManager sharedManager] prepareToPlayWithSound:recordPath];
+    [self.tableView reloadData];
+}
+    
+- (void)voiceRecordCancelledByUser:(POVoiceHUD *)voiceHUD {
+    DDLogVerbose(@"Voice recording cancelled for HUD: %@", voiceHUD);
+}
+
+#pragma mark -
+- (void)recordVoiceMemoForCell:(LSMyDayTableViewCell *)cell {
+
+#ifndef __IPHONE_7_0
+    typedef void (^PermissionBlock)(BOOL granted);
+#endif
+
+    PermissionBlock permissionBlock = ^(BOOL granted) {
+        if (granted)
+        {
+            // 弹出录音提示
+            [_voiceHud startForFilePath:[cell voiceMemoFilePath]];
+            _recordingCellIndexPath = [self.tableView indexPathForCell:cell];
+        }
+        else
+        {
+            // Warn no access to microphone
+            UIAlertView *cantRecordAlert =
+                    [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"NoMicWarningTitle", nil)
+                                               message: NSLocalizedString(@"NoMicWarningMsg", nil)
+                                              delegate: nil
+                                     cancelButtonTitle: NSLocalizedString(@"OK", nil)
+                                     otherButtonTitles: nil];
+            [cantRecordAlert show];
+        }
+    };
+
+    // iOS7+
+    if([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)])
+    {
+        [[AVAudioSession sharedInstance] performSelector:@selector(requestRecordPermission:)
+                                              withObject:permissionBlock];
+    }
+    else
+    {
+        // 弹出录音提示
+        [_voiceHud startForFilePath:[cell voiceMemoFilePath]];
+        _recordingCellIndexPath = [self.tableView indexPathForCell:cell];
+    }
+
+}
+
 
 @end

@@ -74,7 +74,8 @@
     }
     
     // Configure the cell...
-    NSString *rynthmName = [NSString stringWithFormat:NSLocalizedString(@"RynthmName", nil), indexPath.row + 1];
+    NSString * rynthmNameKey = [NSString stringWithFormat:@"RynthmName%d", indexPath.row + 1];
+    NSString * rynthmName = NSLocalizedString(rynthmNameKey, nil);
     [cell.textLabel setText:rynthmName];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger typeNum = [userDefaults integerForKey:@"rynthm_type"];

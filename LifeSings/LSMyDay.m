@@ -9,5 +9,5 @@
 #import "LSMyDay.h"
 
 @implementation LSMyDay
-@dynamic date, smileValue, lastModifiedDate;
+@dynamic date, smileValue, lastModifiedDate, voiceMemoName, voiceMemoDuration;
 @end

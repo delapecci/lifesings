@@ -7,15 +7,27 @@
 */
 "Close"="Start";
 "IntroTitle1"="Before forgetting one day\nRecord its tone\nwith one finger touch";
-"IntroTitle2"="After a period\nListen the song of memories\nbe touched";
+"IntroTitle2"="Some time later\nListen the song of memories\nand be touched";
 
 "DateFormatStr"="M/d";
 "Today"="Today";
-"Yesterday"="YDAY";
-"DayBeforeYesterday"="DBY";
+"Yesterday"="Yesterday";
+"DayBeforeYesterday"="Day Before Yesterday";
 
 "RynthmType"="Rynthm Type";
-"RynthmName"="Rynthm%d";
+"RynthmName1"="Normal";
+"RynthmName2"="Jumping";
+"RynthmName3"="Gentle";
+"RynthmName4"="Comic";
 
 "AppTitle"="Life Sings";
-"Listen"="Listen";
+"Listen"="Echo";
+
+"VisibleYear"="%d";
+"Record"="Record";
+"Play"="Play";
+
+"NoMicWarningTitle"="Sorry";
+"NoMicWarningMsg"="Please grant microphone access permission\n in [Settings -> Privacy -> Microphone]\nbefore recording";
+"OK"="OK";
+"Cancel"="Cancel";

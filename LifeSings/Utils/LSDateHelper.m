@@ -32,4 +32,10 @@
     rollDaysComponents.day = offset;
     return [currentCalendar dateByAddingComponents:rollDaysComponents toDate:date options:0];
 }
++ (NSInteger)yearOfDate:(NSDate *)date
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [cal components:NSCalendarUnitYear fromDate:date];
+    return comps.year;
+}
 @end

@@ -32,13 +32,18 @@
 }
 
 - (void)play {
-    dispatch_queue_t bgQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(bgQueue, ^{
-        [LSSoundPlayerUtil sharedSouncBankPlayer];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self startTimer];
-        });
+    double delayInSeconds = .3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self startTimer];
     });
+    //dispatch_queue_t bgQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //dispatch_async(bgQueue, ^{
+    //    [LSSoundPlayerUtil sharedSouncBankPlayer];
+    //    dispatch_async(dispatch_get_main_queue(), ^{
+    //        [self startTimer];
+    //    });
+    //});
 }
 
 - (void) stop {

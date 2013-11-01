@@ -22,4 +22,5 @@
 
 + (NSDate *)rollDays:(NSInteger)offset fromDate:(NSDate *)date;
 
++ (NSInteger)yearOfDate:(NSDate *)date;
 @end

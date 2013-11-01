@@ -1,6 +1,7 @@
 PODS:
   - CocoaLumberjack (1.6.2)
   - FlatUIKit (1.1)
+  - HexColors (2.2.1)
   - MMDrawerController (0.4.0):
     - MMDrawerController/Core
     - MMDrawerController/MMDrawerBarButtonItem
@@ -13,11 +14,14 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.4.0):
     - MMDrawerController/Core
+  - TSMessages (0.9.4):
+    - HexColors
 
 DEPENDENCIES:
   - CocoaLumberjack
   - FlatUIKit (from `FlatUI`)
   - MMDrawerController (~> 0.4.0)
+  - TSMessages
 
 EXTERNAL SOURCES:
   FlatUIKit:
@@ -26,6 +30,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
   FlatUIKit: 3b15b582ffcfa4e392bedc4d3c5461f9b11c1cc2
+  HexColors: 3a68db077cd6572a8f7d4aa1add284dd2436a934
   MMDrawerController: 44baaee6b79487b4681eb61597fb790586909c0c
+  TSMessages: 5ab92604b02e49a755d2cc2baf114d2248a90977
 
-COCOAPODS: 0.19.1
+COCOAPODS: 0.26.2

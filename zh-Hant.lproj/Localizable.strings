@@ -14,8 +14,20 @@
 "Yesterday"="昨天";
 "DayBeforeYesterday"="前天";
 
-"RynthmType"="節奏型";
-"RynthmName"="節奏%d";
+"RynthmType"="選擇一種節奏";
+"RynthmName1"="普通的";
+"RynthmName2"="跳躍的";
+"RynthmName3"="溫柔的";
+"RynthmName4"="趣味的";
 
 "AppTitle"="時光留聲";
-"Listen"="聆聽";
+"Listen"="回響";
+
+"VisibleYear"="%d年";
+"Record"="說幾句";
+"Play"="播";
+
+"NoMicWarningTitle"="抱歉";
+"NoMicWarningMsg"="我需要麥克風的使用權才能錄音\n請在[設定 -> 隱私 -> 麥克風]里\n為時光留聲授權";
+"OK"="OK";
+"Cancel"="放棄";

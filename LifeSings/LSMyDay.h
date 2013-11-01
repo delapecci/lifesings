@@ -12,4 +12,6 @@
 @property (nonatomic) NSDate *date;
 @property (nonatomic) NSDate *lastModifiedDate;
 @property (nonatomic) NSInteger smileValue;
+@property (nonatomic) NSString *voiceMemoName;
+@property (nonatomic) float voiceMemoDuration;
 @end

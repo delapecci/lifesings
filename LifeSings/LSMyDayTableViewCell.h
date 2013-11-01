@@ -8,13 +8,34 @@
 
 #import <UIKit/UIKit.h>
 #import "LSMyDay.h"
-@class LSMyDay;
-@interface LSMyDayTableViewCell : UITableViewCell
+#import "SWTableViewCell.h"
+#pragma mark - 音符滑块变化事件协议
+@protocol SmileSliderChangedDelegate <NSObject>
+@required
+- (void)onSliderValueChanged:(int)newVal;
+
+@optional
+
+@end
+
+#pragma mark -
+@class LSMyDayTableViewCell;
+@protocol VoiceMemoDelegate <NSObject>
+@required
+- (void)recordVoiceMemoForCell:(LSMyDayTableViewCell *)cell;
+
+@optional
+- (void)playVoiceMemoForCell:(LSMyDayTableViewCell *)cell;
+
+@end
+
+@interface LSMyDayTableViewCell : SWTableViewCell
 @property (nonatomic, readonly) LSMyDay *myDay;
-@property (nonatomic, weak) IBOutlet UIViewController *delegate;
-@property (weak, nonatomic) IBOutlet UISlider *smileSlider;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (nonatomic) id delegate;
+@property (nonatomic) UISlider *smileSlider;
+@property (nonatomic) UILabel *dateLabel;
 
 - (void)configureWithMyDay:(LSMyDay *)myDay;
+- (NSString *)voiceMemoFilePath;
 
 @end

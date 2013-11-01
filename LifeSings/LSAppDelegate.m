@@ -65,14 +65,11 @@
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
     
+    // ios7兼容性问题
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
-        
         self.window.clipsToBounds =YES;
-        
         self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
-        
         //added on 19th Sep
         self.window.bounds = CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height);
     }
@@ -84,15 +81,17 @@
 - (void) initTheme {
     // 自定义主题色调
     UINavigationBar *themeNavBar = [UINavigationBar appearance];
-    [themeNavBar configureFlatNavigationBarWithColor:[UIColor midnightBlueColor]];
+    //[themeNavBar configureFlatNavigationBarWithColor:[UIColor midnightBlueColor]];
+    [themeNavBar setBackgroundImage:[UIImage imageWithColor:[UIColor midnightBlueColor] cornerRadius:0.0f] forBarMetrics:UIBarMetricsDefault];
     [themeNavBar setShadowImage:[UIImage imageWithColor:[UIColor greenSeaColor] cornerRadius:1.0f]];
     themeNavBar.titleTextAttributes = @{UITextAttributeFont: [UIFont flatFontOfSize:21.0f],
             UITextAttributeTextColor: [UIColor whiteColor]};
 
     //[(UITableView *)[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
-    //[(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [(UITableView *)[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[application setStatusBarHidden:NO];
     
+    [(UITableViewCell *)[UITableViewCell appearance] setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 - (void) showIntro
@@ -204,37 +203,67 @@
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+            NSInferMappingModelAutomaticallyOption:@YES,
+            NSSQLitePragmasOption: @{@"journal_mode": @"WAL"}
+    };
 
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                   configuration:nil
-                                                             URL:storeURL
-                                                         options:nil
-                                                           error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current     managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-        */
+    // Check if we need a migration
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
+    NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
+    BOOL isModelCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    if (! isModelCompatible) {
+        // We need a migration, so we set the journal_mode to DELETE
+        options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+                NSInferMappingModelAutomaticallyOption:@YES,
+                NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"}
+        };
+    }
 
+    NSPersistentStore *persistentStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+    if (! persistentStore) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
+    }
+
+    // Reinstate the WAL journal_mode
+    if (! isModelCompatible) {
+        [_persistentStoreCoordinator removePersistentStore:persistentStore error:NULL];
+        options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+                NSInferMappingModelAutomaticallyOption:@YES,
+                NSSQLitePragmasOption: @{@"journal_mode": @"WAL"}
+        };
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                       configuration:nil
+                                                                 URL:storeURL
+                                                             options:options
+                                                               error:&error]) {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
+             Typical reasons for an error here include:
+             * The persistent store is not accessible;
+             * The schema for the persistent store is incompatible with current     managed object model.
+             Check the error message to determine what the actual problem was.
+
+
+             If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
+
+             If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+             * Simply deleting the existing store:
+             [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
+
+             * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+             @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
+
+             Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+            */
+
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
     }
     
     return _persistentStoreCoordinator;

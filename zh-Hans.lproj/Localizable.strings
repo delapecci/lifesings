@@ -14,8 +14,20 @@
 "Yesterday"="昨天";
 "DayBeforeYesterday"="前天";
 
-"RynthmType"="节奏型";
-"RynthmName"="节奏%d";
+"RynthmType"="选择一种节奏";
+"RynthmName1"="普通的";
+"RynthmName2"="跳跃的";
+"RynthmName3"="温柔的";
+"RynthmName4"="趣味的";
 
 "AppTitle"="时光留声";
-"Listen"="聆听";
+"Listen"="回响";
+
+"VisibleYear"="%d年";
+"Record"="说几句";
+"Play"="播";
+
+"NoMicWarningTitle"="抱歉";
+"NoMicWarningMsg"="我需要麦克风的使用权才能录音\n请在[设置 -> 隐私 -> 麦克风]里\n为时光留声授权";
+"OK"="OK";
+"Cancel"="放弃";

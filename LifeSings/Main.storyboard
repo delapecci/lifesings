@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uIN-DO-hGA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uIN-DO-hGA">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -9,7 +9,7 @@
         <scene sceneID="I6J-fr-6PL">
             <objects>
                 <navigationController id="uIN-DO-hGA" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uqp-SZ-2mr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Uqp-SZ-2mr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -31,45 +31,9 @@
             <objects>
                 <tableViewController id="2jg-uD-im9" customClass="LSMyDaysTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="J9I-jR-CFO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LSMyDayCell" rowHeight="54" id="QlM-25-12X" customClass="LSMyDayTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="54"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QlM-25-12X" id="BLy-vF-hVl">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="今天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMR-Uw-yB5">
-                                            <rect key="frame" x="10" y="4" width="57" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="57" id="MxL-My-nHC"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
-                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16" minValue="1" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="5Im-SC-mNZ">
-                                            <rect key="frame" x="73" y="11" width="239" height="34"/>
-                                        </slider>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="gMR-Uw-yB5" secondAttribute="bottom" constant="-2" id="Bqb-V3-EY9"/>
-                                        <constraint firstItem="5Im-SC-mNZ" firstAttribute="leading" secondItem="gMR-Uw-yB5" secondAttribute="trailing" constant="8" symbolic="YES" id="Jxv-0F-xTh"/>
-                                        <constraint firstItem="5Im-SC-mNZ" firstAttribute="centerY" secondItem="BLy-vF-hVl" secondAttribute="centerY" id="W8Z-Mz-Uhb"/>
-                                        <constraint firstAttribute="trailing" secondItem="5Im-SC-mNZ" secondAttribute="trailing" constant="10" id="WCE-PN-DHS"/>
-                                        <constraint firstItem="gMR-Uw-yB5" firstAttribute="top" secondItem="BLy-vF-hVl" secondAttribute="top" constant="4" id="lpc-Fe-eCP"/>
-                                        <constraint firstItem="gMR-Uw-yB5" firstAttribute="leading" secondItem="BLy-vF-hVl" secondAttribute="leading" constant="10" id="qeh-Nn-uvJ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="dateLabel" destination="gMR-Uw-yB5" id="ZGh-pc-dcQ"/>
-                                    <outlet property="smileSlider" destination="5Im-SC-mNZ" id="0kt-lY-8JJ"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="2jg-uD-im9" id="VW6-Bs-KsX"/>
                             <outlet property="delegate" destination="2jg-uD-im9" id="5Ee-Ew-f2X"/>
